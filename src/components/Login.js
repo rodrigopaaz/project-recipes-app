@@ -1,8 +1,7 @@
-import React, { useContext, useState } from 'react';
-import AppContext from '../context/Context';
+import React, { useState } from 'react';
 
 export default function Login() {
-  const [login, setLogin] = useState({ email: '', password: ''});
+  const [login, setLogin] = useState({ email: '', password: '' });
   const [isDisabled, setIsDisabled] = useState(true);
 
   const validateInputs = () => {
@@ -12,20 +11,9 @@ export default function Login() {
     const isValisPassword = login.password.trim().length >= NUMBERSIX;
     if (isValidEmail && isValisPassword) {
       setIsDisabled(false);
-    } else { setIsDisabled(true) };
+    } else { setIsDisabled(true); }
   };
-  // function disableValidation() {
-  //   const NUMBER_MIN = 6;
-  //   const regex = /\S+@\S+\.\S+/;
-  //   const validacion = regex.test(login.email);
-  //   const condicion = login.password.length >= NUMBER_MIN;
 
-  //   const validation = (
-  //     !validacion
-  //     || !condicion
-  //   );
-  //   return validation;
-  // }
   return (
     <form>
       <label htmlFor="email">
@@ -37,7 +25,7 @@ export default function Login() {
           placeholder="email"
           name="email"
           value={ login.email }
-          onChange={({ target: { name, value } }) => {
+          onChange={ ({ target: { name, value } }) => {
             setLogin({ ...login, [name]: value });
             validateInputs();
           } }
@@ -52,10 +40,10 @@ export default function Login() {
           id="password"
           value={ login.password }
           placeholder="password"
-          onChange={({ target: { name, value } }) => {
+          onChange={ ({ target: { name, value } }) => {
             setLogin({ ...login, [name]: value });
             validateInputs();
-          }}
+          } }
         />
       </label>
       <button
@@ -68,4 +56,4 @@ export default function Login() {
       </button>
     </form>
   );
-};
+}
