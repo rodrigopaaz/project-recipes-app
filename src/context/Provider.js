@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import AppContext from './Context';
 
@@ -10,6 +9,4 @@ export default function AppProvider({ children }) {
   );
 }
 
-AppProvider.propTypes = {
-  children: PropTypes.shape().isRequired,
-};
+AppProvider.propTypes = {}.isRequired;
