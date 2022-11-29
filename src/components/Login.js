@@ -12,6 +12,11 @@ export default function Login() {
     if (isValidEmail && isValisPassword) {
       setIsDisabled(false);
     } else { setIsDisabled(true); }
+
+  };
+
+  const handleSubmit = () => {
+    localStorage.setItem('user', JSON.stringify({ email: login.email }));
   };
 
   return (
@@ -50,7 +55,7 @@ export default function Login() {
         type="button"
         data-testid="login-submit-btn"
         disabled={ isDisabled }
-      // onClick={ () => }
+        onClick={ handleSubmit }
       >
         Enter
       </button>
