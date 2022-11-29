@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 export default function Login() {
+  const history = useHistory();
   const [login, setLogin] = useState({ email: '', password: '' });
   const [isDisabled, setIsDisabled] = useState(true);
 
@@ -12,11 +14,11 @@ export default function Login() {
     if (isValidEmail && isValisPassword) {
       setIsDisabled(false);
     } else { setIsDisabled(true); }
-
   };
 
   const handleSubmit = () => {
     localStorage.setItem('user', JSON.stringify({ email: login.email }));
+    history.push('/meals');
   };
 
   return (
