@@ -1,5 +1,4 @@
-import React, { useContext, useState } from 'react';
-import AppContext from '../context/Context';
+import React, { useState } from 'react';
 
 export default function Login() {
   const [login, setLogin] = useState({ email: '', password: '' });
@@ -14,18 +13,11 @@ export default function Login() {
       setIsDisabled(false);
     } else { setIsDisabled(true); }
   };
-  // function disableValidation() {
-  //   const NUMBER_MIN = 6;
-  //   const regex = /\S+@\S+\.\S+/;
-  //   const validacion = regex.test(login.email);
-  //   const condicion = login.password.length >= NUMBER_MIN;
 
-  //   const validation = (
-  //     !validacion
-  //     || !condicion
-  //   );
-  //   return validation;
-  // }
+  const handleSubmit = () => {
+    localStorage.setItem('user', JSON.stringify({ email: login.email }));
+  };
+
   return (
     <form>
       <label htmlFor="email">
@@ -62,7 +54,7 @@ export default function Login() {
         type="button"
         data-testid="login-submit-btn"
         disabled={ isDisabled }
-      // onClick={ () => }
+        onClick={ handleSubmit }
       >
         Enter
       </button>
