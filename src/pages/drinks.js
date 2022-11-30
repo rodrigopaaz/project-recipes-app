@@ -1,6 +1,7 @@
 import React from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import Recipes from '../components/Recipes';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
@@ -24,6 +25,7 @@ export default function Drinks() {
           <img src={ searchIcon } alt="search-icon" data-testid="search-top-btn" />
         </button>
       </Header>
+      <Recipes url={'https://www.thecocktaildb.com/api/json/v1/1/search.php?s='}/>
       <Footer />
     </div>
   );
