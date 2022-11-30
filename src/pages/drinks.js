@@ -25,7 +25,7 @@ export default function Drinks() {
           <img src={ searchIcon } alt="search-icon" data-testid="search-top-btn" />
         </button>
       </Header>
-      <Recipes url={'https://www.thecocktaildb.com/api/json/v1/1/search.php?s='}/>
+      <Recipes url={ 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=' }/>
       <Footer />
     </div>
   );
