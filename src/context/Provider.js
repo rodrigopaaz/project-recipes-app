@@ -3,7 +3,7 @@ import AppContext from './Context';
 
 export default function AppProvider({ children }) {
   const [handleSearch, setHandleSearch] = useState(false);
-  const [handleChoice, setHandleChoice] = useState('');
+  const [handleChoice, setHandleChoice] = useState('meals');
 
   const data = useMemo(
     () => ({ handleSearch, setHandleSearch, handleChoice, setHandleChoice }),
