@@ -21,8 +21,16 @@ describe('Testando o componente Footer', () => (
     userEvent.type(inputEmail, 'emailValido@outlook.com');
     userEvent.type(inputPassword, '1234567');
     userEvent.click(loginBtn);
-
+/* 
     const { location: { pathname } } = history;
-    expect(pathname).tobe('/meals');
+    expect(pathname).toBe('/meals'); */
+
+    const drinkBtn = screen.queryByTestId('drinks-bottom-btn')
+
+    userEvent.click(drinkBtn);
+
+    const mealsBtn = screen.getByTestId('meals-bottom-btn')
+    userEvent.click(mealsBtn);
+
   })
 ));
