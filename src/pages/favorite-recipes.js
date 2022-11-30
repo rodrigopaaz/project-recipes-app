@@ -7,7 +7,15 @@ export default function Favorite() {
     <div>
       <Header>
         <h4 data-testid="page-title">Favorite Recipes</h4>
-        <img src={ profileIcon } alt="profile-icon" data-testid="profile-top-btn" />
+        <button
+          type="button"
+        >
+          <img
+            src={ profileIcon }
+            alt="profile-icon"
+            data-testid="profile-top-btn"
+          />
+        </button>
       </Header>
     </div>
   );

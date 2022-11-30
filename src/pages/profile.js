@@ -7,7 +7,15 @@ export default function Profile() {
     <div>
       <Header>
         <h4 data-testid="page-title">Profile</h4>
-        <img src={ profileIcon } alt="profile-icon" data-testid="profile-top-btn" />
+        <button
+          type="button"
+        >
+          <img
+            src={ profileIcon }
+            alt="profile-icon"
+            data-testid="profile-top-btn"
+          />
+        </button>
       </Header>
     </div>
   );

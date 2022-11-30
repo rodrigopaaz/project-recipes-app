@@ -8,8 +8,20 @@ export default function Drinks() {
     <div>
       <Header>
         <h4 data-testid="page-title">Drinks</h4>
-        <img src={ profileIcon } alt="profile-icon" data-testid="profile-top-btn" />
-        <img src={ searchIcon } alt="search-icon" data-testid="search-top-btn" />
+        <button
+          type="button"
+        >
+          <img
+            src={ profileIcon }
+            alt="profile-icon"
+            data-testid="profile-top-btn"
+          />
+        </button>
+        <button
+          type="button"
+        >
+          <img src={ searchIcon } alt="search-icon" data-testid="search-top-btn" />
+        </button>
       </Header>
     </div>
   );
