@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import drinkIcon from '../images/drinkIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
+import AppContext from '../context/Context';
 
 export default function Footer() {
+  const { setHandleChoice } = useContext(AppContext);
   const history = useHistory();
+
   return (
     <footer data-testid="footer">
       <button
         type="button"
-        onClick={ () => { history.push('/drinks'); } }
+        id="drinks"
+        onClick={ ({ target }) => {
+          history.push('/drinks');
+          setHandleChoice(target.id);
+        } }
       >
         <img
           src={ drinkIcon }
@@ -19,7 +26,11 @@ export default function Footer() {
       </button>
       <button
         type="button"
-        onClick={ () => { history.push('/meals'); } }
+        id="meals"
+        onClick={ ({ target }) => {
+          history.push('/meals');
+          setHandleChoice(target.id);
+        } }
       >
         <img
           src={ mealIcon }
