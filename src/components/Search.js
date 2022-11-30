@@ -1,4 +1,5 @@
 import React from 'react';
+import useFetch from '../hooks/useFetch';
 
 export default function Search() {
   return (
@@ -28,7 +29,7 @@ export default function Search() {
           />
         </label>
         <label htmlFor="first-letter-search-radio">
-          First Letter
+          First letter
           <input
             type="radio"
             name="radioSearch"
