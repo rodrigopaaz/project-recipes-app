@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 import renderWithRouter from './helpers/renderWithRouter';
@@ -7,7 +7,7 @@ import AppProvider from '../context/Provider';
 
 describe('Testando o componente Login', () => (
   test('Testando os Inputs', () => {
-    const { history } = renderWithRouter(<AppProvider><App /></AppProvider>);
+    renderWithRouter(<AppProvider><App /></AppProvider>);
 
     const inputEmail = screen.getByTestId('email-input');
     expect(inputEmail).toBeInTheDocument();
