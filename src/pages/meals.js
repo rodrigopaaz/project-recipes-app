@@ -31,7 +31,10 @@ export default function Meals() {
           <img src={ searchIcon } alt="search-icon" data-testid="search-top-btn" />
         </button>
       </Header>
-      <Recipes url="https://www.themealdb.com/api/json/v1/1/search.php?s=" />
+      <Recipes
+        urlSearch="https://www.themealdb.com/api/json/v1/1/search.php?s="
+        urlCategories="https://www.themealdb.com/api/json/v1/1/list.php?c=list"
+      />
       <Footer />
     </div>
   );
