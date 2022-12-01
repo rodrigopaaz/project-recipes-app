@@ -8,6 +8,7 @@ export default function SearchBar() {
   const [onChangeInput, setOnChangeInput] = useState('');
   const [radio, setRadio] = useState('');
   const { requiredApi } = useFetch(url);
+  console.log(requiredApi);
 
   function meals() {
     if (radio === 'igredient') {
