@@ -8,6 +8,7 @@ export default function SearchBar() {
   const [onChangeInput, setOnChangeInput] = useState('');
   const [radio, setRadio] = useState('');
   const { requiredApi } = useFetch(url);
+  console.log(requiredApi);
 
   function meals() {
     if (radio === 'igredient') {
@@ -17,8 +18,8 @@ export default function SearchBar() {
       return setUrl(`https://www.themealdb.com/api/json/v1/1/search.php?s=${onChangeInput}`);
     }
     if (radio === 'first-letter') {
-      if (radio.length > 1) {
-        global.alert('Your search must have only 1 (one) character');
+      if (onChangeInput.length > 1) {
+        return global.alert('Your search must have only 1 (one) character');
       }
       return setUrl(`https://www.themealdb.com/api/json/v1/1/search.php?f=${onChangeInput}`);
     }
@@ -32,43 +33,19 @@ export default function SearchBar() {
       return setUrl(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${onChangeInput}`);
     }
     if (radio === 'first-letter') {
-      if (radio.length > 1) {
-        global.alert('Your search must have only 1 (one) character');
+      if (onChangeInput.length !== 1) {
+        return global.alert('Your search must have only 1 (one) character');
       }
       return setUrl(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${onChangeInput}`);
     }
   }
-
+  console.log(onChangeInput.length);
   function handleClick() {
     if (handleChoice === 'meals') {
       return meals();
-      // if (radio === 'igredient') {
-      //   return setUrl(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${onChangeInput}`);
-      // }
-      // if (radio === 'name') {
-      //   return setUrl(`https://www.themealdb.com/api/json/v1/1/search.php?s=${onChangeInput}`);
-      // }
-      // if (radio === 'first-letter') {
-      //   if (radio.length > 1) {
-      //     global.alert('Your search must have only 1 (one) character');
-      //   }
-      //   return setUrl(`https://www.themealdb.com/api/json/v1/1/search.php?f=${onChangeInput}`);
-      // }
     }
     if (handleChoice === 'drinks') {
       return drinks();
-      // if (radio === 'igredient') {
-      //   return setUrl(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${onChangeInput}`);
-      // }
-      // if (radio === 'name') {
-      //   return setUrl(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${onChangeInput}`);
-      // }
-      // if (radio === 'first-letter') {
-      //   if (radio.length > 1) {
-      //     global.alert('Your search must have only 1 (one) character');
-      //   }
-      //   return setUrl(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${onChangeInput}`);
-      // }
     }
   }
   console.log(url);
@@ -83,7 +60,7 @@ export default function SearchBar() {
             onChange={ ({ target }) => setOnChangeInput(target.value) }
           />
         </label>
-        <label htmlFor="ingredient-search-radio">
+        <label htmlFor="ingredient">
           Ingredient
           <input
             type="radio"
@@ -94,7 +71,7 @@ export default function SearchBar() {
             onChange={ ({ target }) => setRadio(target.value) }
           />
         </label>
-        <label htmlFor="name-search-radio">
+        <label htmlFor="name">
           Name
           <input
             type="radio"
@@ -105,7 +82,7 @@ export default function SearchBar() {
             onChange={ ({ target }) => setRadio(target.value) }
           />
         </label>
-        <label htmlFor="first-letter-search-radio">
+        <label htmlFor="first-letter">
           First letter
           <input
             type="radio"
