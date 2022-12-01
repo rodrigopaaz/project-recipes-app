@@ -7,7 +7,7 @@ import AppProvider from '../context/Provider';
 
 describe('Testando o componente Footer', () => (
   test('Testando a aplicação', () => {
-    const { history } = renderWithRouter(<AppProvider><App /></AppProvider>);
+    renderWithRouter(<AppProvider><App /></AppProvider>);
 
     const inputEmail = screen.getByTestId('email-input');
     expect(inputEmail).toBeInTheDocument();
@@ -21,9 +21,6 @@ describe('Testando o componente Footer', () => (
     userEvent.type(inputEmail, 'emailValido@outlook.com');
     userEvent.type(inputPassword, '1234567');
     userEvent.click(loginBtn);
-    /*
-    const { location: { pathname } } = history;
-    expect(pathname).toBe('/meals'); */
 
     const drinkBtn = screen.queryByTestId('drinks-bottom-btn');
 
@@ -32,4 +29,5 @@ describe('Testando o componente Footer', () => (
     const mealsBtn = screen.getByTestId('meals-bottom-btn');
     userEvent.click(mealsBtn);
   })
+
 ));
