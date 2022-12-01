@@ -1,10 +1,4 @@
-#root {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
 footer {
-  position: fixed;
   bottom: 0px;
+  position: fixed;
 }
