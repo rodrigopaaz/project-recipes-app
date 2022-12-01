@@ -6,7 +6,7 @@ import renderWithRouter from './helpers/renderWithRouter';
 import AppProvider from '../context/Provider';
 
 describe('Testando o componente Footer', () => (
-  test('Testando a aplicação', () => {
+  test('Testando os Inputs', () => {
     renderWithRouter(<AppProvider><App /></AppProvider>);
 
     const inputEmail = screen.getByTestId('email-input');
