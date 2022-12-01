@@ -39,7 +39,7 @@ export default function SearchBar() {
       return setUrl(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${onChangeInput}`);
     }
   }
-  console.log(onChangeInput.length);
+
   function handleClick() {
     if (handleChoice === 'meals') {
       return meals();
