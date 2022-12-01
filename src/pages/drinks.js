@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Recipes from '../components/Recipes';
+import AppContext from '../context/Context';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
 export default function Drinks() {
+  const { setHandleSearch, handleSearch, setHandleChoice } = useContext(AppContext);
+
+  useEffect(() => {
+    setHandleChoice('drinks');
+  }, []);
+
   return (
     <div>
       <Header>
@@ -21,6 +28,7 @@ export default function Drinks() {
         </button>
         <button
           type="button"
+          onClick={ () => setHandleSearch(!handleSearch) }
         >
           <img src={ searchIcon } alt="search-icon" data-testid="search-top-btn" />
         </button>
