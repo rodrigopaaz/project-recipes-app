@@ -43,6 +43,8 @@ describe(
       });
 
       userEvent.click(searchBtn1);
+      userEvent.click(searchBtn1);
+      userEvent.click(searchBtn1);
 
       const searchImput = screen.getByTestId(searchInput);
       expect(searchImput).toBeInTheDocument();
@@ -55,6 +57,9 @@ describe(
 
       const firstLetterRadio = screen.getByTestId(firstLetter);
       expect(firstLetterRadio).toBeInTheDocument();
+      userEvent.type(searchImput, 'c');
+      userEvent.click(ingredientRadio);
+      userEvent.clear(searchImput);
 
       userEvent.type(searchImput, 'carrot');
       userEvent.click(ingredientRadio);
@@ -95,13 +100,30 @@ describe(
     const nameRadio = screen.getByTestId(nameSearch);
     expect(nameRadio).toBeInTheDocument();
 
+    const searchBtn = screen.queryByTestId(execBtn);
+    userEvent.click(searchBtn);
+    const ingredientsRadio = screen.getByTestId(ingredientSearch);
+    userEvent.click(ingredientsRadio);
+    userEvent.click(searchBtn);
+    userEvent.clear(searchImput);
+
     userEvent.type(searchImput, 'carrot');
     userEvent.click(nameRadio);
 
-    const searchBtn = screen.queryByTestId(execBtn);
     expect(searchBtn).toBeInTheDocument();
 
     userEvent.click(searchBtn);
+    userEvent.clear(searchImput);
+
+    const firtLetter = screen.getByTestId(firstLetter);
+    userEvent.click(firtLetter);
+    userEvent.type(searchImput, 'c');
+    userEvent.click(searchBtn);
+    userEvent.clear(searchImput);
+
+    userEvent.type(searchImput, 'carrot');
+    userEvent.click(searchBtn);
+    userEvent.clear(searchImput);
   }),
   it('Testando nameRadio', () => {
     renderWithRouter(<AppProvider><App /></AppProvider>);
@@ -120,6 +142,7 @@ describe(
     userEvent.click(loginBtn);
 
     const drinksBtn = screen.getByTestId(drinksBottonBtn);
+
     userEvent.click(drinksBtn);
 
     const searchBtn1 = screen.getByRole('button', {
@@ -153,6 +176,11 @@ describe(
     userEvent.click(searchBtn);
 
     userEvent.type(searchImput, 'carrot');
+    userEvent.click(searchBtn);
+    userEvent.clear(searchImput);
+
+    userEvent.type(searchImput, 'xablau');
+    userEvent.click(nameRadio);
     userEvent.click(searchBtn);
   }),
 );

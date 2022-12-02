@@ -7,13 +7,14 @@ import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
 export default function Drinks() {
-  const { setHandleSearch, handleSearch, setHandleChoice } = useContext(AppContext);
+  const { setHandleSearch, handleSearch,
+    setHandleChoice, filteredApi } = useContext(AppContext);
 
   useEffect(() => {
     setHandleChoice('drinks');
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  const URL = filteredApi || 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
   return (
     <div>
       <Header>
@@ -35,7 +36,7 @@ export default function Drinks() {
         </button>
       </Header>
       <Recipes
-        urlSearch="https://www.thecocktaildb.com/api/json/v1/1/search.php?s="
+        urlSearch={ URL }
         urlCategories="https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list"
       />
       <Footer />

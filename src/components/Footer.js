@@ -1,12 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import drinkIcon from '../images/drinkIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
 import AppContext from '../context/Context';
 
 export default function Footer() {
-  const { setHandleChoice } = useContext(AppContext);
+  const { setHandleChoice, setFilteredApi } = useContext(AppContext);
   const history = useHistory();
+
+  useEffect(() => {
+    setFilteredApi(null);
+  }, [setHandleChoice]);
 
   function handleClick({ target }) {
     if (target.id === 'drinks') {

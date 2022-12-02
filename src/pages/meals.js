@@ -8,8 +8,9 @@ import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
 export default function Meals() {
-  const { setHandleSearch, handleSearch } = useContext(AppContext);
+  const { setHandleSearch, handleSearch, filteredApi } = useContext(AppContext);
   const history = useHistory();
+  const URL = filteredApi || 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
   return (
     <div>
       <Header>
@@ -32,7 +33,7 @@ export default function Meals() {
         </button>
       </Header>
       <Recipes
-        urlSearch="https://www.themealdb.com/api/json/v1/1/search.php?s="
+        urlSearch={ URL }
         urlCategories="https://www.themealdb.com/api/json/v1/1/list.php?c=list"
       />
       <Footer />
