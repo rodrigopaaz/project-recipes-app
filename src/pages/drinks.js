@@ -7,12 +7,13 @@ import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
 export default function Drinks() {
-  const { setHandleSearch, handleSearch, setHandleChoice } = useContext(AppContext);
+  const { setHandleSearch, handleSearch,
+    setHandleChoice, filteredApi } = useContext(AppContext);
 
   useEffect(() => {
     setHandleChoice('drinks');
   }, []);
-
+  const URL = filteredApi || 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
   return (
     <div>
       <Header>
@@ -33,7 +34,7 @@ export default function Drinks() {
           <img src={ searchIcon } alt="search-icon" data-testid="search-top-btn" />
         </button>
       </Header>
-      <Recipes url="https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" />
+      <Recipes url={ URL } />
       <Footer />
     </div>
   );

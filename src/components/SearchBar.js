@@ -3,12 +3,13 @@ import useFetch from '../hooks/useFetch';
 import AppContext from '../context/Context';
 
 export default function SearchBar() {
-  const { handleChoice } = useContext(AppContext);
+  const { handleChoice, setFilteredApi } = useContext(AppContext);
   const [url, setUrl] = useState('');
   const [onChangeInput, setOnChangeInput] = useState('');
   const [radio, setRadio] = useState('');
   const { requiredApi } = useFetch(url);
   console.log(requiredApi);
+  setFilteredApi(url);
 
   function meals() {
     if (radio === 'igredient') {
@@ -48,7 +49,6 @@ export default function SearchBar() {
       return drinks();
     }
   }
-  console.log(url);
   return (
     <form>
       <div>
@@ -96,7 +96,10 @@ export default function SearchBar() {
         <button
           type="button"
           data-testid="exec-search-btn"
-          onClick={ handleClick }
+          onClick={ () => {
+            handleClick();
+            setFilteredApi(url);
+          } }
         >
           Search
         </button>
