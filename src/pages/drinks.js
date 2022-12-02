@@ -12,6 +12,7 @@ export default function Drinks() {
 
   useEffect(() => {
     setHandleChoice('drinks');
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const URL = filteredApi || 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
   return (
@@ -34,7 +35,10 @@ export default function Drinks() {
           <img src={ searchIcon } alt="search-icon" data-testid="search-top-btn" />
         </button>
       </Header>
-      <Recipes url={ URL } />
+      <Recipes
+        urlSearch={ URL }
+        urlCategories="https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list"
+      />
       <Footer />
     </div>
   );

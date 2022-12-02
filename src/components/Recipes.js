@@ -2,14 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import RecipeCard from './RecipeCard';
 
-export default function Recipes({ url }) {
+export default function Recipes({ urlSearch, urlCategories }) {
   const [recipeApi, setRecipeApi] = useState([]);
   const history = useHistory();
   const [handleDish, setHandleDish] = useState(null);
   const [handleEndPoint, setHandleEndPoint] = useState('');
+  const [categoryApi, SetCategoryApi] = useState([]);
+  console.log(categoryApi);
+
   useEffect(() => {
     const fetchRecipes = async () => {
-      const request = await fetch(url);
+      const request = await fetch(urlSearch);
       const response = await request.json();
       const recipes = response.meals || response.drinks;
       if (!recipes) {
@@ -28,21 +31,41 @@ export default function Recipes({ url }) {
       }
     };
     fetchRecipes();
-  }, [url]);
+    const fetchCategories = async () => {
+      const response = await fetch(urlCategories);
+      const results = await response.json();
+      const categories = results.meals || results.drinks;
+      SetCategoryApi(categories);
+    };
+    fetchCategories();
+  }, [urlSearch, urlCategories]);
 
   return (
-    <div>
-      { handleDish
-        ? history.push(`./${handleDish}/${handleEndPoint}`)
-        : recipeApi.filter((e, index) => index <= Number('11')).map((e, index) => (
-          <RecipeCard
-            key={ e.idMeal || e.idDrink }
-            name={ e.strMeal || e.strDrink }
-            image={ e.strMealThumb || e.strDrinkThumb }
-            index={ index }
-          />
+    <section>
+      <div>
+        { categoryApi.filter((e, index) => index <= Number('4')).map((e, index) => (
+          <button
+            key={ index }
+            type="button"
+            data-testid={ `${e.strCategory}-category-filter` }
+          >
+            {e.strCategory}
+          </button>
         ))}
-    </div>
+      </div>
+      <div>
+        { handleDish
+          ? history.push(`./${handleDish}/${handleEndPoint}`)
+          : recipeApi.filter((e, index) => index <= Number('11')).map((e, index) => (
+            <RecipeCard
+              key={ e.idMeal || e.idDrink }
+              name={ e.strMeal || e.strDrink }
+              image={ e.strMealThumb || e.strDrinkThumb }
+              index={ index }
+            />
+          ))}
+      </div>
+    </section>
 
   );
 }
