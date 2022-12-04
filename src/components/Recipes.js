@@ -1,39 +1,59 @@
 import React, { useState, useEffect } from 'react';
 import RecipeCard from './RecipeCard';
 
-export default function Recipes({ urlSearch, urlCategories }) {
+export default function Recipes({ urlSearch, urlList, urlFilter }) {
   const [recipeApi, setRecipeApi] = useState([]);
-  const [categoryApi, SetCategoryApi] = useState([]);
+  const [categoryApi, setCategoryApi] = useState([]);
+  const [slugCategory, setSlugCategory] = useState('');
 
   useEffect(() => {
     const fetchRecipes = async () => {
-      const request = await fetch(urlSearch);
-      const response = await request.json();
-      const recipes = response.meals || response.drinks;
-      setRecipeApi(recipes);
+      if (!slugCategory) {
+        const request = await fetch(urlSearch);
+        const response = await request.json();
+        const recipes = response.meals || response.drinks;
+        setRecipeApi(recipes);
+      } else {
+        const request = await fetch(`${urlFilter}${slugCategory}`);
+        const response = await request.json();
+        const recipes = response.meals || response.drinks;
+        setRecipeApi(recipes);
+      }
     };
     fetchRecipes();
     const fetchCategories = async () => {
-      const response = await fetch(urlCategories);
+      const response = await fetch(urlList);
       const results = await response.json();
       const categories = results.meals || results.drinks;
-      SetCategoryApi(categories);
+      setCategoryApi(categories);
     };
     fetchCategories();
-  }, [urlSearch, urlCategories]);
+  }, [urlSearch, urlList, urlFilter, slugCategory]);
 
   return (
-    <section>
+    <main>
       <div>
         { categoryApi.filter((e, index) => index <= Number('4')).map((e, index) => (
           <button
             key={ index }
             type="button"
             data-testid={ `${e.strCategory}-category-filter` }
+            name={ e.strCategory }
+            value={ e.strCategory }
+            onClick={ (elem) => {
+              setSlugCategory((elem.target.value));
+            } }
           >
             {e.strCategory}
           </button>
         ))}
+        <button
+          type="button"
+          data-testid="All-category-filter"
+          onClick={ () => setSlugCategory('') }
+        >
+          All
+        </button>
       </div>
       <div>
         { recipeApi.filter((e, index) => index <= Number('11')).map((e, index) => (
@@ -45,8 +65,7 @@ export default function Recipes({ urlSearch, urlCategories }) {
           />
         ))}
       </div>
-    </section>
-
+    </main>
   );
 }
 

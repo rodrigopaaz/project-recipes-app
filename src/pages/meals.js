@@ -33,7 +33,8 @@ export default function Meals() {
       </Header>
       <Recipes
         urlSearch="https://www.themealdb.com/api/json/v1/1/search.php?s="
-        urlCategories="https://www.themealdb.com/api/json/v1/1/list.php?c=list"
+        urlList="https://www.themealdb.com/api/json/v1/1/list.php?c=list"
+        urlFilter="https://www.themealdb.com/api/json/v1/1/filter.php?c="
       />
       <Footer />
     </div>
