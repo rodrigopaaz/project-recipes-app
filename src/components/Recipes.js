@@ -8,7 +8,7 @@ export default function Recipes({ urlSearch, urlCategories }) {
   const [handleDish, setHandleDish] = useState(null);
   const [handleEndPoint, setHandleEndPoint] = useState('');
   const [categoryApi, SetCategoryApi] = useState([]);
-  console.log(categoryApi);
+  console.log(handleDish, 'handle');
 
   useEffect(() => {
     const fetchRecipes = async () => {
@@ -25,9 +25,9 @@ export default function Recipes({ urlSearch, urlCategories }) {
         const endPoint = (Object.values(recipes[0])[0]);
         setHandleDish(dish);
         setHandleEndPoint(endPoint);
-        if (recipes.length === 0) {
+        /*        if (recipes.length === 0) {
           global.alert('Sorry, we haven\'t found any recipes for these filters.');
-        }
+        } */
       }
     };
     fetchRecipes();
@@ -62,6 +62,7 @@ export default function Recipes({ urlSearch, urlCategories }) {
               name={ e.strMeal || e.strDrink }
               image={ e.strMealThumb || e.strDrinkThumb }
               index={ index }
+              path={ e }
             />
           ))}
       </div>
