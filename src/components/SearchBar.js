@@ -1,14 +1,19 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import useFetch from '../hooks/useFetch';
 import AppContext from '../context/Context';
 
 export default function SearchBar() {
-  const { handleChoice } = useContext(AppContext);
+  const { handleChoice, setFilteredApi } = useContext(AppContext);
   const [url, setUrl] = useState('');
   const [onChangeInput, setOnChangeInput] = useState('');
   const [radio, setRadio] = useState('');
   const { requiredApi } = useFetch(url);
   console.log(requiredApi);
+
+  useEffect(() => {
+    setFilteredApi(url);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [url]);
 
   function meals() {
     if (radio === 'igredient') {
@@ -48,7 +53,6 @@ export default function SearchBar() {
       return drinks();
     }
   }
-  console.log(url);
   return (
     <form>
       <div>
@@ -61,7 +65,6 @@ export default function SearchBar() {
           />
         </label>
         <label htmlFor="ingredient">
-          Ingredient
           <input
             type="radio"
             id="igredient"
@@ -70,9 +73,9 @@ export default function SearchBar() {
             value="igredient"
             onChange={ ({ target }) => setRadio(target.value) }
           />
+          Ingredient
         </label>
         <label htmlFor="name">
-          Name
           <input
             type="radio"
             id="name"
@@ -81,9 +84,9 @@ export default function SearchBar() {
             value="name"
             onChange={ ({ target }) => setRadio(target.value) }
           />
+          Name
         </label>
         <label htmlFor="first-letter">
-          First letter
           <input
             type="radio"
             id="first-letter"
@@ -92,11 +95,15 @@ export default function SearchBar() {
             value="first-letter"
             onChange={ ({ target }) => setRadio(target.value) }
           />
+          First letter
         </label>
         <button
           type="button"
           data-testid="exec-search-btn"
-          onClick={ handleClick }
+          onClick={ () => {
+            handleClick();
+            setFilteredApi(url);
+          } }
         >
           Search
         </button>
