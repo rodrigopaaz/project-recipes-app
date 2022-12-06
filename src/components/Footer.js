@@ -10,6 +10,7 @@ export default function Footer() {
 
   useEffect(() => {
     setFilteredApi(null);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setHandleChoice]);
 
   function handleClick({ target }) {

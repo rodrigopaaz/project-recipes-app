@@ -5,6 +5,8 @@ export default function AppProvider({ children }) {
   const [handleSearch, setHandleSearch] = useState(false);
   const [handleChoice, setHandleChoice] = useState('meals');
   const [filteredApi, setFilteredApi] = useState(null);
+  const [handleDish, setHandleDish] = useState(null);
+  const [handleEndPoint, setHandleEndPoint] = useState('');
 
   const data = useMemo(
     () => ({ handleSearch,
@@ -12,9 +14,14 @@ export default function AppProvider({ children }) {
       handleChoice,
       setHandleChoice,
       setFilteredApi,
-      filteredApi }),
-    [handleSearch, setHandleSearch, handleChoice, setHandleChoice,
-      setFilteredApi, filteredApi],
+      filteredApi,
+      handleDish,
+      setHandleDish,
+      handleEndPoint,
+      setHandleEndPoint }),
+    [handleSearch, setHandleSearch, handleChoice,
+      setHandleChoice, setFilteredApi, filteredApi, handleDish,
+      setHandleDish, handleEndPoint, setHandleEndPoint],
   );
 
   return (

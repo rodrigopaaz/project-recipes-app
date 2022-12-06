@@ -67,6 +67,10 @@ describe('Testando o componente Recipes', () => {
     const nameRadio = screen.getByTestId('name-search-radio');
     const searchBtn = screen.getByTestId('exec-search-btn');
 
+    const beefCategory = await screen.findByTestId('Beef-category-filter');
+    userEvent.click(beefCategory);
+    userEvent.click(beefCategory);
+
     userEvent.type(searchInput, 'Arrabiata');
     userEvent.click(nameRadio);
     userEvent.click(searchBtn);
@@ -74,6 +78,6 @@ describe('Testando o componente Recipes', () => {
     const textDetails = await screen.findByText(/teste/i);
     expect(textDetails).toBeInTheDocument();
 
-    screen.logTestingPlaygroundURL();
+    // screen.logTestingPlaygroundURL();
   });
 });

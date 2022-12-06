@@ -37,7 +37,8 @@ export default function Drinks() {
       </Header>
       <Recipes
         urlSearch={ URL }
-        urlCategories="https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list"
+        urlList="https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list"
+        urlFilter="https://www.thecocktaildb.com/api/json/v1/1/filter.php?c="
       />
       <Footer />
     </div>
