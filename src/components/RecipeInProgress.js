@@ -7,6 +7,7 @@ export default function RecipeInProgress() {
   const history = useHistory();
   const { location: { pathname } } = history;
   const [fetchMealOrDrink, setFetchMealOrDrink] = useState([]);
+  const [ingredients, setIngredients] = useState([]);
 
   useEffect(() => {
     const mealsUrl = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
@@ -17,6 +18,8 @@ export default function RecipeInProgress() {
       const response = await request.json();
       const recipes = response.meals || response.drinks;
       setFetchMealOrDrink(recipes || []);
+      setIngredients(Object.entries(recipes[0])
+        .filter(([key, value]) => key.includes('Ingredient') && value));
     };
     fetchDish();
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -45,6 +48,16 @@ export default function RecipeInProgress() {
           />
           <h2 data-testid="recipe-title">{e.strMeal || e.strDrink}</h2>
           <h3 data-testid="recipe-category">{e.strCategory}</h3>
+          { ingredients.map((elem, index) => (
+            <label
+              key={ index }
+              htmlFor={ `${index}-ingredient` }
+              data-testid={ `${index}-ingredient-step` }
+            >
+              <input id={ `${index}-ingredient` } type="checkbox" />
+              { elem[1] }
+            </label>
+          ))}
           <p data-testid="instructions">{ e.strInstructions }</p>
           <button
             data-testid="finish-recipe-btn"
