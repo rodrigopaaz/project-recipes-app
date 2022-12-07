@@ -5,7 +5,7 @@ import App from '../App';
 import renderWithRouter from './helpers/renderWithRouter';
 import AppProvider from '../context/Provider';
 
-describe('Testando o componente Login', () => (
+describe('Testando o componente Header', () => (
   test('Testando os Inputs', () => {
     renderWithRouter(<AppProvider><App /></AppProvider>);
 

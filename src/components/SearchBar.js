@@ -1,13 +1,19 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import useFetch from '../hooks/useFetch';
 import AppContext from '../context/Context';
 
 export default function SearchBar() {
-  const { handleChoice } = useContext(AppContext);
+  const { handleChoice, setFilteredApi } = useContext(AppContext);
   const [url, setUrl] = useState('');
   const [onChangeInput, setOnChangeInput] = useState('');
   const [radio, setRadio] = useState('');
   const { requiredApi } = useFetch(url);
+  console.log(requiredApi);
+
+  useEffect(() => {
+    setFilteredApi(url);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [url]);
 
   function meals() {
     if (radio === 'igredient') {
@@ -17,8 +23,8 @@ export default function SearchBar() {
       return setUrl(`https://www.themealdb.com/api/json/v1/1/search.php?s=${onChangeInput}`);
     }
     if (radio === 'first-letter') {
-      if (radio.length > 1) {
-        global.alert('Your search must have only 1 (one) character');
+      if (onChangeInput.length > 1) {
+        return global.alert('Your search must have only 1 (one) character');
       }
       return setUrl(`https://www.themealdb.com/api/json/v1/1/search.php?f=${onChangeInput}`);
     }
@@ -32,8 +38,8 @@ export default function SearchBar() {
       return setUrl(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${onChangeInput}`);
     }
     if (radio === 'first-letter') {
-      if (radio.length > 1) {
-        global.alert('Your search must have only 1 (one) character');
+      if (onChangeInput.length !== 1) {
+        return global.alert('Your search must have only 1 (one) character');
       }
       return setUrl(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${onChangeInput}`);
     }
@@ -42,36 +48,11 @@ export default function SearchBar() {
   function handleClick() {
     if (handleChoice === 'meals') {
       return meals();
-      // if (radio === 'igredient') {
-      //   return setUrl(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${onChangeInput}`);
-      // }
-      // if (radio === 'name') {
-      //   return setUrl(`https://www.themealdb.com/api/json/v1/1/search.php?s=${onChangeInput}`);
-      // }
-      // if (radio === 'first-letter') {
-      //   if (radio.length > 1) {
-      //     global.alert('Your search must have only 1 (one) character');
-      //   }
-      //   return setUrl(`https://www.themealdb.com/api/json/v1/1/search.php?f=${onChangeInput}`);
-      // }
     }
     if (handleChoice === 'drinks') {
       return drinks();
-      // if (radio === 'igredient') {
-      //   return setUrl(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${onChangeInput}`);
-      // }
-      // if (radio === 'name') {
-      //   return setUrl(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${onChangeInput}`);
-      // }
-      // if (radio === 'first-letter') {
-      //   if (radio.length > 1) {
-      //     global.alert('Your search must have only 1 (one) character');
-      //   }
-      //   return setUrl(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${onChangeInput}`);
-      // }
     }
   }
-  console.log(url);
   return (
     <form>
       <div>
@@ -83,8 +64,7 @@ export default function SearchBar() {
             onChange={ ({ target }) => setOnChangeInput(target.value) }
           />
         </label>
-        <label htmlFor="ingredient-search-radio">
-          Ingredient
+        <label htmlFor="ingredient">
           <input
             type="radio"
             id="igredient"
@@ -93,9 +73,9 @@ export default function SearchBar() {
             value="igredient"
             onChange={ ({ target }) => setRadio(target.value) }
           />
+          Ingredient
         </label>
-        <label htmlFor="name-search-radio">
-          Name
+        <label htmlFor="name">
           <input
             type="radio"
             id="name"
@@ -104,9 +84,9 @@ export default function SearchBar() {
             value="name"
             onChange={ ({ target }) => setRadio(target.value) }
           />
+          Name
         </label>
-        <label htmlFor="first-letter-search-radio">
-          First letter
+        <label htmlFor="first-letter">
           <input
             type="radio"
             id="first-letter"
@@ -115,11 +95,15 @@ export default function SearchBar() {
             value="first-letter"
             onChange={ ({ target }) => setRadio(target.value) }
           />
+          First letter
         </label>
         <button
           type="button"
           data-testid="exec-search-btn"
-          onClick={ handleClick }
+          onClick={ () => {
+            handleClick();
+            setFilteredApi(url);
+          } }
         >
           Search
         </button>
