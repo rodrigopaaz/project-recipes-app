@@ -34,6 +34,8 @@ export default function RecipeDetails() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
+  const isInProgress = localStorage.inProgressRecipes ? 'Continue Recipe' : 'Start Recipe';
+
   return (
     <div>
       { fetchMealOrDrink.map((e) => (
@@ -88,7 +90,7 @@ export default function RecipeDetails() {
             type="button"
             data-testid="start-recipe-btn"
           >
-            Start Recipe
+            {isInProgress}
           </button>
         </div>
       ))}
