@@ -83,6 +83,13 @@ export default function RecipeDetails() {
             </div>)}
           {pathname.includes('meals') ? <DrinksRecomendation />
             : <MealsRecomendation />}
+          <button
+            style={ { position: 'fixed', bottom: '0px' } }
+            type="button"
+            data-testid="start-recipe-btn"
+          >
+            Start Recipe
+          </button>
         </div>
       ))}
     </div>
