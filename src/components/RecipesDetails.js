@@ -2,15 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import DrinksRecomendation from './DrinksRecomendation';
 import MealsRecomendation from './MealsRecomendation copy';
+import blackHeartIcon from '../images/whiteHeartIcon.svg';
+import whiteHeartIcon from '../images/blackHeartIcon.svg';
 
 export default function RecipeDetails() {
   const params = useParams();
   const history = useHistory();
   const { location: { pathname } } = history;
   const { id } = params;
+  const [isCopy, setIsCopy] = useState(false);
   const [fetchMealOrDrink, setFetchMealOrDrink] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     const mealsUrl = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
@@ -29,12 +33,51 @@ export default function RecipeDetails() {
       // }, {}));
       setMeasures(Object.entries(recipes[0])
         .filter(([key, value]) => key.includes('Measure') && value && value !== ' '));
+
+      const saved = localStorage.favoriteRecipes
+        ? JSON.parse(localStorage.favoriteRecipes) : [];
+      if (saved.find((el) => el.ID === id)) {
+        setIsFavorite(true);
+      }
     };
     fetchDish();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
-  const isInProgress = localStorage.inProgressRecipes ? 'Continue Recipe' : 'Start Recipe';
+  const isInProgress = localStorage.inProgressRecipes
+    ? 'Continue Recipe' : 'Start Recipe';
+  const recipeUrl = window.location.href;
+
+  const saveFavorite = (e) => {
+    if (!localStorage.favoriteRecipes) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+    }
+    const ID = e.idMeal || e.idDrink;
+    const type = e.idMeal ? 'meal' : 'drink';
+    const nationality = e.strArea || '';
+    const category = e.strCategory || '';
+    const alcoholicOrNot = e.strAlcoholic || '';
+    const name = e.strDrink || e.strMeal;
+    const image = e.strDrinkThumb || e.strMealThumb;
+    const saved = JSON.parse(localStorage.favoriteRecipes);
+    const newData = { id: ID,
+      type,
+      nationality,
+      category,
+      alcoholicOrNot,
+      name,
+      image };
+    const updated = [...saved, newData];
+    if (!saved.find((el) => el.ID === newData.ID)) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify(updated));
+    }
+  };
+
+  const removeFavorite = () => {
+    const saved = JSON.parse(localStorage.favoriteRecipes) || '';
+    const removeItem = saved.filter((el) => el.ID !== id);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(removeItem));
+  };
 
   return (
     <div>
@@ -92,6 +135,36 @@ export default function RecipeDetails() {
           >
             {isInProgress}
           </button>
+          {isCopy && <p>Link copied!</p>}
+          <div style={ { display: 'flex', justifyContent: 'center', width: '100%' } }>
+            <button
+              type="button"
+              data-testid="share-btn"
+              onClick={ () => {
+                navigator.clipboard.writeText(recipeUrl);
+                setIsCopy(true);
+              } }
+            >
+              Share
+            </button>
+            <button
+              type="button"
+              data-testid="favorite-btn"
+              onClick={ (() => {
+                if (!isFavorite) { saveFavorite(e); }
+                if (isFavorite) { removeFavorite(); }
+                setIsFavorite(!isFavorite);
+              }
+              ) }
+            >
+              <img
+                src={ !isFavorite
+                  ? blackHeartIcon
+                  : whiteHeartIcon }
+                alt="favorites"
+              />
+            </button>
+          </div>
         </div>
       ))}
     </div>
