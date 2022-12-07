@@ -1,9 +1,3 @@
-#root {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
 footer {
   bottom: 0;
   position: fixed;
