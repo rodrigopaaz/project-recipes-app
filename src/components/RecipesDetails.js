@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import DrinksRecomendation from './DrinksRecomendation';
+import MealsRecomendation from './MealsRecomendation copy';
 
 export default function RecipeDetails() {
   const params = useParams();
@@ -79,6 +81,8 @@ export default function RecipeDetails() {
                 src={ e.strYoutube.replace('watch?v=', 'embed/') }
               />
             </div>)}
+          {pathname.includes('meals') ? <DrinksRecomendation />
+            : <MealsRecomendation />}
         </div>
       ))}
     </div>
