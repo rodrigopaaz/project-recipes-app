@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import DrinksRecomendation from './DrinksRecomendation';
 import MealsRecomendation from './MealsRecomendation copy';
-import blackHeartIcon from '../images/whiteHeartIcon.svg';
-import whiteHeartIcon from '../images/blackHeartIcon.svg';
+import heartOn from '../images/whiteHeartIcon.svg';
+import heartOff from '../images/blackHeartIcon.svg';
 
 export default function RecipeDetails() {
   const params = useParams();
@@ -36,7 +36,7 @@ export default function RecipeDetails() {
 
       const saved = localStorage.favoriteRecipes
         ? JSON.parse(localStorage.favoriteRecipes) : [];
-      if (saved.find((el) => el.ID === id)) {
+      if (saved.find((el) => el.id === id)) {
         setIsFavorite(true);
       }
     };
@@ -149,7 +149,6 @@ export default function RecipeDetails() {
             </button>
             <button
               type="button"
-              data-testid="favorite-btn"
               onClick={ (() => {
                 if (!isFavorite) { saveFavorite(e); }
                 if (isFavorite) { removeFavorite(); }
@@ -158,9 +157,10 @@ export default function RecipeDetails() {
               ) }
             >
               <img
+                data-testid="favorite-btn"
                 src={ !isFavorite
-                  ? blackHeartIcon
-                  : whiteHeartIcon }
+                  ? heartOn
+                  : heartOff }
                 alt="favorites"
               />
             </button>
