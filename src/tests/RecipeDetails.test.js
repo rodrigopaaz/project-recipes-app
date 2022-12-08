@@ -34,10 +34,6 @@ describe(
       const firstImage = await screen.findByTestId('0-card-name');
       userEvent.click(firstImage);
 
-      const startRecipeBtn = await screen.findByTestId('start-recipe-btn');
-      userEvent.click(startRecipeBtn);
-      userEvent.click(startRecipeBtn);
-
       const shareBtn = await screen.findByTestId('share-btn');
 
       const favoriteBtn = await screen.findByTestId('favorite-btn');
@@ -47,6 +43,10 @@ describe(
 
       userEvent.click(shareBtn);
       userEvent.click(shareBtn);
+
+      const startRecipeBtn = await screen.findByTestId('start-recipe-btn');
+      userEvent.click(startRecipeBtn);
+      userEvent.click(startRecipeBtn);
     })),
   test('Testando a funcionalidade do componente', async () => {
     renderWithRouter(<AppProvider><App /></AppProvider>);
@@ -71,10 +71,6 @@ describe(
     const firstImage = await screen.findByTestId('0-card-name');
     userEvent.click(firstImage);
 
-    const startRecipeBtn = await screen.findByTestId('start-recipe-btn');
-    userEvent.click(startRecipeBtn);
-    userEvent.click(startRecipeBtn);
-
     const shareBtn = await screen.findByTestId('share-btn');
 
     const favoriteBtn = await screen.findByTestId('favorite-btn');
@@ -84,6 +80,13 @@ describe(
 
     userEvent.click(shareBtn);
     userEvent.click(shareBtn);
+
+    const startRecipeBtn = await screen.findByTestId('start-recipe-btn');
+    userEvent.click(startRecipeBtn);
+    userEvent.click(startRecipeBtn);
+
+    const inProgressImg = await screen.findByTestId('recipe-photo');
+    expect(inProgressImg).toBeInTheDocument();
   }),
 
 );
