@@ -38,9 +38,9 @@ describe(
       userEvent.click(startRecipeBtn);
       userEvent.click(startRecipeBtn);
 
-      const shareBtn = screen.queryByTestId('share-btn');
+      const shareBtn = await screen.findByTestId('share-btn');
 
-      const favoriteBtn = screen.getByTestId('favorite-btn');
+      const favoriteBtn = await screen.findByTestId('favorite-btn');
       userEvent.click(favoriteBtn);
       userEvent.click(favoriteBtn);
       userEvent.click(favoriteBtn);
@@ -75,9 +75,9 @@ describe(
     userEvent.click(startRecipeBtn);
     userEvent.click(startRecipeBtn);
 
-    const shareBtn = screen.queryByTestId('share-btn');
+    const shareBtn = await screen.findByTestId('share-btn');
 
-    const favoriteBtn = screen.getByTestId('favorite-btn');
+    const favoriteBtn = await screen.findByTestId('favorite-btn');
     userEvent.click(favoriteBtn);
     userEvent.click(favoriteBtn);
     userEvent.click(favoriteBtn);
