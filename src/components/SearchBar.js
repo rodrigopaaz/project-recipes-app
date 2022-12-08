@@ -53,6 +53,7 @@ export default function SearchBar() {
       return drinks();
     }
   }
+
   return (
     <form>
       <div>

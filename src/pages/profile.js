@@ -1,6 +1,7 @@
 import React from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import ProfileComponent from '../components/ProfileComponent';
 import profileIcon from '../images/profileIcon.svg';
 
 export default function Profile() {
@@ -18,6 +19,7 @@ export default function Profile() {
           />
         </button>
       </Header>
+      <ProfileComponent />
       <Footer />
     </div>
   );
