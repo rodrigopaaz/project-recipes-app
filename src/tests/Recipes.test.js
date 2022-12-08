@@ -41,8 +41,8 @@ describe('Testando o componente Recipes', () => {
     userEvent.click(nameRadio);
     userEvent.click(searchBtn);
 
-    const textDetails = await screen.findByText(/teste/i);
-    expect(textDetails).toBeInTheDocument();
+    const startRecipeBtn = await screen.findByTestId('start-recipe-btn');
+    expect(startRecipeBtn).toBeInTheDocument();
   });
 
   test('Testando a aplicação', async () => {
@@ -75,8 +75,8 @@ describe('Testando o componente Recipes', () => {
     userEvent.click(nameRadio);
     userEvent.click(searchBtn);
 
-    const textDetails = await screen.findByText(/teste/i);
-    expect(textDetails).toBeInTheDocument();
+    const startRecipeBtn = await screen.findByTestId('start-recipe-btn');
+    expect(startRecipeBtn).toBeInTheDocument();
 
     // screen.logTestingPlaygroundURL();
   });
