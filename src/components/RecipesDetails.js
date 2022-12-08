@@ -132,6 +132,9 @@ export default function RecipeDetails() {
             style={ { position: 'fixed', bottom: '0px' } }
             type="button"
             data-testid="start-recipe-btn"
+            onClick={ (() => {
+              history.push(`${pathname}/in-progress`);
+            }) }
           >
             {isInProgress}
           </button>
@@ -141,7 +144,9 @@ export default function RecipeDetails() {
               type="button"
               data-testid="share-btn"
               onClick={ () => {
-                navigator.clipboard.writeText(recipeUrl);
+                if (navigator.clipboard) {
+                  navigator.clipboard.writeText(recipeUrl);
+                }
                 setIsCopy(true);
               } }
             >
