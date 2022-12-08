@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import '../App.css';
 
 export default function RecipeInProgress() {
   const params = useParams();
@@ -8,6 +9,7 @@ export default function RecipeInProgress() {
   const { location: { pathname } } = history;
   const [fetchMealOrDrink, setFetchMealOrDrink] = useState([]);
   const [ingredients, setIngredients] = useState([]);
+  const [isChecked, setIsChecked] = useState([]);
 
   useEffect(() => {
     const mealsUrl = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
@@ -18,12 +20,21 @@ export default function RecipeInProgress() {
       const response = await request.json();
       const recipes = response.meals || response.drinks;
       setFetchMealOrDrink(recipes || []);
-      setIngredients(Object.entries(recipes[0])
-        .filter(([key, value]) => key.includes('Ingredient') && value));
+      const selectIngredients = Object.entries(recipes[0])
+        .filter(([key, value]) => key.includes('Ingredient') && value);
+      setIngredients(selectIngredients);
+      setIsChecked(new Array(selectIngredients.length).fill(false));
     };
     fetchDish();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, []);
+
+  // https://www.freecodecamp.org/portuguese/news/tutorial-de-react-como-trabalhar-com-varias-caixas-de-selecao/
+  const handleChange = (position) => {
+    const updatedCheckedState = isChecked
+      .map((item, index) => (index === position ? !item : item));
+    setIsChecked(updatedCheckedState);
+  };
 
   return (
     <div>
@@ -49,14 +60,22 @@ export default function RecipeInProgress() {
           <h2 data-testid="recipe-title">{e.strMeal || e.strDrink}</h2>
           <h3 data-testid="recipe-category">{e.strCategory}</h3>
           { ingredients.map((elem, index) => (
-            <label
-              key={ index }
-              htmlFor={ `${index}-ingredient` }
-              data-testid={ `${index}-ingredient-step` }
-            >
-              <input id={ `${index}-ingredient` } type="checkbox" />
-              { elem[1] }
-            </label>
+            <li key={ index }>
+              <label
+                htmlFor={ `${index}-ingredient-step` }
+                data-testid={ `${index}-ingredient-step` }
+                style={ { textDecoration: isChecked[index]
+                    && 'line-through solid rgb(0, 0, 0)' } }
+              >
+                <input
+                  type="checkbox"
+                  id={ `${index}-ingredient-step` }
+                  checked={ isChecked[index] }
+                  onChange={ () => handleChange(index) }
+                />
+                {elem[1]}
+              </label>
+            </li>
           ))}
           <p data-testid="instructions">{ e.strInstructions }</p>
           <button
