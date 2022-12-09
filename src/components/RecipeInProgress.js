@@ -9,43 +9,19 @@ export default function RecipeInProgress() {
   const { location: { pathname } } = history;
   const [fetchMealOrDrink, setFetchMealOrDrink] = useState([]);
   const [ingredients, setIngredients] = useState([]);
-  const [isChecked, setIsChecked] = useState([]);
-  // const [localCheckedState, setlocalCheckedState] = useState([]);
+  const [isChecked, setIsChecked] = useState(null);
 
-  const handleRecipies = () => {
-    const isInProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    const isMeal = pathname.includes('meals') ? 'meals' : 'drinks';
-    const addIngredient = {
-      [isInProgressRecipes[isMeal]]: { [id]: [isChecked] },
-    };
-    const addIngredient2 = {
-      [isMeal]: { [id]: [isChecked] },
-    };
-    if (!isInProgressRecipes) {
-      localStorage.setItem(
-        'inProgressRecipes',
-        JSON.stringify([addIngredient]),
-      );
-      console.log(1);
+  useEffect(() => {
+    if (!localStorage.inProgressRecipes) {
+      const isMeal = pathname.includes('meals') ? 'meals' : 'drinks';
+      localStorage.setItem('inProgressRecipes', JSON.stringify({ [isMeal]: {} }));
     }
-    if (isInProgressRecipes) {
-      localStorage.setItem(
-        'inProgressRecipes',
-        JSON.stringify([...isInProgressRecipes, addIngredient2]),
-      );
-      console.log(2);
+    if (localStorage.inProgressRecipes.includes(id)) {
+      const checkMeal = pathname.includes('meals') ? 'meals' : 'drinks';
+      const updatedChecked = JSON.parse(localStorage.inProgressRecipes)[checkMeal][id];
+      setIsChecked([...updatedChecked]);
     }
-  };
-
-  // //{
-  //   drinks: {
-  //     id-da-bebida: [lista-de-ingredientes-utilizados],
-  //     ...
-  // },
-  // meals: {
-  //     id-da-comida: [lista-de-ingredientes-utilizados],
-  //     ...
-  // }
+  }, []);
 
   useEffect(() => {
     const mealsUrl = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
@@ -59,35 +35,36 @@ export default function RecipeInProgress() {
       const selectIngredients = Object.entries(recipes[0])
         .filter(([key, value]) => key.includes('Ingredient') && value);
       setIngredients(selectIngredients);
-      setIsChecked(new Array(selectIngredients.length).fill(false));
-      // setlocalCheckedState(localStorage.getItem('inProgressRecipes'));
+      const isMeal2 = pathname.includes('meals') ? 'meals' : 'drinks';
+      const updatedChecked = JSON.parse(localStorage.inProgressRecipes)[isMeal2][id];
+      if (!updatedChecked) {
+        setIsChecked(new Array(selectIngredients.length)
+          .fill(false));
+      }
     };
     fetchDish();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // useEffect(() => {
-  //   handleRecipies();
-  //   console.log('entrou');
-  // }, [isChecked]);
+  const handleRecipies = () => {
+    const isMeal = pathname.includes('meals') ? 'meals' : 'drinks';
+    if (localStorage.inProgressRecipes) {
+      const parseRecipes = JSON.parse(localStorage.inProgressRecipes);
+      localStorage.setItem(
+        'inProgressRecipes',
+        JSON.stringify({ ...parseRecipes,
+          [isMeal]: { ...parseRecipes[isMeal], [id]: isChecked } }),
+      );
+    }
+  };
 
-  // useEffect(() => {
-  //   setlocalCheckedState(localStorage.getItem('inProgressRecipes'));
-  //   const setLocal = (position) => {
-  //     const teste = localCheckedState
-  //       .map((item, index) => (index === position ? !item : item));
-  //     setIsChecked(teste);
-  //   };
-  //   setLocal();
-  // }, []);
+  useEffect(() => {
+    handleRecipies();
+  }, [isChecked]);
 
-  // https://www.freecodecamp.org/portuguese/news/tutorial-de-react-como-trabalhar-com-varias-caixas-de-selecao/
   const handleChange = (position) => {
     const updatedCheckedState = isChecked
       .map((item, index) => (index === position ? !item : item));
     setIsChecked(updatedCheckedState);
-    handleRecipies();
-    // localStorage.setItem('inProgressRecipes', (`${updatedCheckedState}`));
   };
 
   return (
