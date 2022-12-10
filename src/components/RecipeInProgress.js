@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import '../App.css';
+import heartOn from '../images/whiteHeartIcon.svg';
+import heartOff from '../images/blackHeartIcon.svg';
+import doneRecipesLocalStorage from './doneRecipesLocalStorage';
 
 export default function RecipeInProgress() {
   const params = useParams();
   const { id } = params;
   const history = useHistory();
   const { location: { pathname } } = history;
+
   const [fetchMealOrDrink, setFetchMealOrDrink] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [isChecked, setIsChecked] = useState(null);
+  const [isCopy, setIsCopy] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
     if (!localStorage.inProgressRecipes) {
@@ -42,11 +49,24 @@ export default function RecipeInProgress() {
           .fill(false));
       }
     };
+    const saved = localStorage.favoriteRecipes
+      ? JSON.parse(localStorage.favoriteRecipes) : [];
+    if (saved.find((el) => el.id === id)) {
+      setIsFavorite(true);
+    }
     fetchDish();
   }, []);
 
   const handleRecipies = () => {
     const isMeal = pathname.includes('meals') ? 'meals' : 'drinks';
+    if (isChecked) {
+      if (!isChecked.includes(false)) {
+        setIsDisabled(false);
+      }
+      if (isChecked.includes(false)) {
+        setIsDisabled(true);
+      }
+    }
     if (localStorage.inProgressRecipes) {
       const parseRecipes = JSON.parse(localStorage.inProgressRecipes);
       localStorage.setItem(
@@ -59,12 +79,46 @@ export default function RecipeInProgress() {
 
   useEffect(() => {
     handleRecipies();
+    /*     if (!isChecked.includes(false)) {
+      setIsDisabled(false);
+    } */
   }, [isChecked]);
 
   const handleChange = (position) => {
     const updatedCheckedState = isChecked
       .map((item, index) => (index === position ? !item : item));
     setIsChecked(updatedCheckedState);
+  };
+
+  const saveFavorite = (e) => {
+    if (!localStorage.favoriteRecipes) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+    }
+    const ID = e.idMeal || e.idDrink;
+    const type = e.idMeal ? 'meal' : 'drink';
+    const nationality = e.strArea || '';
+    const category = e.strCategory || '';
+    const alcoholicOrNot = e.strAlcoholic || '';
+    const name = e.strDrink || e.strMeal;
+    const image = e.strDrinkThumb || e.strMealThumb;
+    const saved = JSON.parse(localStorage.favoriteRecipes);
+    const newData = { id: ID,
+      type,
+      nationality,
+      category,
+      alcoholicOrNot,
+      name,
+      image };
+    const updated = [...saved, newData];
+    if (!saved.find((el) => el.ID === newData.ID)) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify(updated));
+    }
+  };
+
+  const removeFavorite = () => {
+    const saved = JSON.parse(localStorage.favoriteRecipes) || '';
+    const removeItem = saved.filter((el) => el.id !== id);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(removeItem));
   };
 
   return (
@@ -74,14 +128,33 @@ export default function RecipeInProgress() {
           <button
             data-testid="share-btn"
             type="button"
+            onClick={ () => {
+              if (navigator.clipboard) {
+                const recipeUrl = window.location.href;
+                navigator.clipboard.writeText(recipeUrl.replace('/in-progress', ''));
+              }
+              setIsCopy(true);
+            } }
           >
             Compartilhar
           </button>
+          {isCopy && <p>Link copied!</p>}
           <button
-            data-testid="favorite-btn"
             type="button"
+            onClick={ (() => {
+              if (!isFavorite) { saveFavorite(e); }
+              if (isFavorite) { removeFavorite(); }
+              setIsFavorite(!isFavorite);
+            }
+            ) }
           >
-            Favoritar
+            <img
+              data-testid="favorite-btn"
+              src={ !isFavorite
+                ? heartOn
+                : heartOff }
+              alt="favorites"
+            />
           </button>
           <img
             data-testid="recipe-photo"
@@ -112,6 +185,11 @@ export default function RecipeInProgress() {
           <button
             data-testid="finish-recipe-btn"
             type="button"
+            disabled={ isDisabled }
+            onClick={ () => {
+              doneRecipesLocalStorage(e);
+              history.push('/done-recipes');
+            } }
           >
             Finalizar
           </button>
