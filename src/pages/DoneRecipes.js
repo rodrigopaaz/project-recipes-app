@@ -5,18 +5,32 @@ import profileIcon from '../images/profileIcon.svg';
 
 export default function Done() {
   const [getDoneRecipes, setGetDoneRecipes] = useState([]);
+  const [filterDoneRecipes, setFilterDoneRecipes] = useState('all');
   useEffect(() => {
     const getDone = () => {
-      const getFromLocalStorage = JSON.parse(localStorage.doneRecipes);
-      /*       setGetDoneRecipes([{
+      if (localStorage.doneRecipes) {
+        const getFromLocalStorage = JSON.parse(localStorage.doneRecipes);
+        switch (filterDoneRecipes) {
+        case 'drinks':
+          return setGetDoneRecipes(
+            getFromLocalStorage.filter((e) => e.type === 'drink'),
+          );
+        case 'meals':
+          return setGetDoneRecipes(
+            getFromLocalStorage.filter((e) => e.type === 'meal'),
+          );
+        default:
+          return setGetDoneRecipes(getFromLocalStorage);
+        }
+        /*       setGetDoneRecipes([{
         meals: getFromLocalStorage.filter((e) => e.type === 'meal'),
         drinks: getFromLocalStorage.filter((e) => e.type === 'drink'),
       }]); */
-      setGetDoneRecipes(getFromLocalStorage);
+      }
+      return setGetDoneRecipes([]);
     };
     getDone();
-  }, []);
-  console.log(getDoneRecipes);
+  }, [filterDoneRecipes]);
   return (
     <div>
       <Header>
@@ -35,18 +49,21 @@ export default function Done() {
         <button
           type="button"
           data-testid="filter-by-all-btn"
+          onClick={ () => setFilterDoneRecipes('all') }
         >
           All
         </button>
         <button
           type="button"
           data-testid="filter-by-meal-btn"
+          onClick={ () => setFilterDoneRecipes('meals') }
         >
           Meals
         </button>
         <button
           type="button"
           data-testid="filter-by-drink-btn"
+          onClick={ () => setFilterDoneRecipes('drinks') }
         >
           Drinks
         </button>
