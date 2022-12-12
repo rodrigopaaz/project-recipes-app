@@ -32,7 +32,7 @@ describe(
       expect(btnFavorite).toBeInTheDocument();
       expect(btnLogout).toBeInTheDocument();
     })),
-  test('Verifica a funcionalidade do done', () => {
+  test('Verifica a funcionalidade dos botões', () => {
     const { history } = renderWithRouter(<AppProvider><App /></AppProvider>);
 
     const email = screen.getByTestId('email-input');
@@ -64,6 +64,16 @@ describe(
     const titleFavorite = screen.getByRole('heading', { name: /favorite recipes/i });
 
     expect(titleFavorite).toBeInTheDocument();
+
+    act(() => history.push('/profile'));
+
+    const buttnLogout = screen.getByRole('button', { name: /logout/i });
+
+    userEvent.click(buttnLogout);
+
+    const inptEmail = screen.getByRole('textbox', { name: /login:/i });
+
+    expect(inptEmail).toBeInTheDocument();
   }),
 
 );
