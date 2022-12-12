@@ -1,38 +1,69 @@
 import React from 'react';
+import { act } from 'react-dom/test-utils';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from './helpers/renderWithRouter';
 import AppProvider from '../context/Provider';
 import App from '../App';
 
-describe('Testando o componente Profile', () => (
-  test('Verifica se os botões estão no Profile', () => {
-    renderWithRouter(<AppProvider><App /></AppProvider>);
+describe(
+  'Testando o componente Profile',
+  () => (
+    test('Verifica se os botões estão no Profile', () => {
+      renderWithRouter(<AppProvider><App /></AppProvider>);
 
-    const inputEmail = screen.getByTestId('email-input');
-    expect(inputEmail).toBeInTheDocument();
+      const inputEmail = screen.getByTestId('email-input');
+      const inputPassword = screen.getByTestId('password-input');
+      const loginBtn = screen.getByTestId('login-submit-btn');
 
-    const inputPassword = screen.getByTestId('password-input');
-    expect(inputPassword).toBeInTheDocument();
+      userEvent.type(inputEmail, 'emailValido@outlook.com');
+      userEvent.type(inputPassword, '1234567');
+      userEvent.click(loginBtn);
 
-    const loginBtn = screen.getByTestId('login-submit-btn');
-    expect(loginBtn).toBeDisabled();
+      const btnProfile = screen.getByRole('button', { name: /profile-icon/i });
 
-    userEvent.type(inputEmail, 'emailValido@outlook.com');
-    userEvent.type(inputPassword, '1234567');
-    userEvent.click(loginBtn);
+      userEvent.click(btnProfile);
 
-    const btnProfile = screen.getByRole('button', { name: /profile-icon/i });
+      const btnDone = screen.getByRole('button', { name: /done recipes/i });
+      const btnLogout = screen.getByRole('button', { name: /logout/i });
+      const btnFavorite = screen.getByRole('button', { name: /favorite recipes/i });
 
-    userEvent.click(btnProfile);
+      expect(btnDone).toBeInTheDocument();
+      expect(btnFavorite).toBeInTheDocument();
+      expect(btnLogout).toBeInTheDocument();
+    })),
+  test('Verifica a funcionalidade do done', () => {
+    const { history } = renderWithRouter(<AppProvider><App /></AppProvider>);
 
-    const btnDone = screen.getByRole('button', { name: /done recipes/i });
-    const btnLogout = screen.getByRole('button', { name: /logout/i });
-    const btnFavorite = screen.getByRole('button', { name: /favorite recipes/i });
+    const email = screen.getByTestId('email-input');
+    const password = screen.getByTestId('password-input');
+    const loginButton = screen.getByTestId('login-submit-btn');
 
-    expect(btnDone).toBeInTheDocument();
-    expect(btnFavorite).toBeInTheDocument();
-    expect(btnLogout).toBeInTheDocument();
-  })
+    userEvent.type(email, 'emailValido@outlook.com');
+    userEvent.type(password, '1234567');
+    userEvent.click(loginButton);
 
-));
+    const buttonProfile = screen.getByRole('button', { name: /profile-icon/i });
+
+    userEvent.click(buttonProfile);
+
+    const buttonDone = screen.getByRole('button', { name: /done recipes/i });
+
+    userEvent.click(buttonDone);
+
+    const titleDone = screen.getByRole('heading', { name: /done recipes/i });
+
+    expect(titleDone).toBeInTheDocument();
+
+    act(() => history.push('/profile'));
+
+    const buttnFavorite = screen.getByRole('button', { name: /favorite recipes/i });
+
+    userEvent.click(buttnFavorite);
+
+    const titleFavorite = screen.getByRole('heading', { name: /favorite recipes/i });
+
+    expect(titleFavorite).toBeInTheDocument();
+  }),
+
+);
