@@ -1,6 +1,9 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
-function ProfileComponent() {
+function Profile() {
+  const history = useHistory();
+
   return (
     <form>
       <input
@@ -13,6 +16,7 @@ function ProfileComponent() {
       <button
         type="button"
         data-testid="profile-done-btn"
+        onClick={ () => history.push('/done-recipes') }
       >
         Done Recipes
       </button>
@@ -32,4 +36,4 @@ function ProfileComponent() {
   );
 }
 
-export default ProfileComponent;
+export default Profile;

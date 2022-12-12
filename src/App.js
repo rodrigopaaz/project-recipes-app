@@ -5,11 +5,11 @@ import { Switch, Route } from 'react-router-dom';
 import Login from './components/Login';
 import Meals from './pages/meals';
 import Drinks from './pages/drinks';
-import Profile from './pages/profile';
 import Favorite from './pages/favorite-recipes';
 import Done from './pages/done-recipes';
 import RecipeDetails from './components/RecipeDetails';
 import RecipeInProgress from './components/RecipeInProgress';
+import ProfilePage from './pages/profile-pages';
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
         <Route exact path="/" component={ Login } />
         <Route exact path="/meals" component={ Meals } />
         <Route exact path="/drinks" component={ Drinks } />
-        <Route exact path="/profile" component={ Profile } />
+        <Route exact path="/profile" component={ ProfilePage } />
         <Route exact path="/favorite-recipes" component={ Favorite } />
         <Route exact path="/done-recipes" component={ Done } />
         <Route exact path="/meals/:id" component={ RecipeDetails } />
