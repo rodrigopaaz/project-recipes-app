@@ -8,6 +8,7 @@ function ProfileComponent() {
         name="email"
         id="email"
         data-testid="profile-email"
+        placeholder={ JSON.parse(localStorage.getItem('user')).email }
       />
       <button
         type="button"

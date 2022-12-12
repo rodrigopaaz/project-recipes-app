@@ -4,6 +4,7 @@ import SearchBar from './SearchBar';
 
 export default function Header({ children }) {
   const { handleSearch } = useContext(AppContext);
+
   return (
     <div>
       {children}
