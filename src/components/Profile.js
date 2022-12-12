@@ -4,15 +4,13 @@ import { useHistory } from 'react-router-dom';
 function Profile() {
   const history = useHistory();
 
+  const emailStorage = JSON.parse(localStorage.getItem('user')).email;
+
   return (
     <form>
-      <input
-        type="email"
-        name="email"
-        id="email"
-        data-testid="profile-email"
-        placeholder={ JSON.parse(localStorage.getItem('user')).email }
-      />
+      <p data-testid="profile-email">
+        {emailStorage}
+      </p>
       <button
         type="button"
         data-testid="profile-done-btn"
