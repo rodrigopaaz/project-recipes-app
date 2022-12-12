@@ -4,7 +4,8 @@ import { useHistory } from 'react-router-dom';
 function Profile() {
   const history = useHistory();
 
-  const emailStorage = JSON.parse(localStorage.getItem('user')).email;
+  const emailStorage = localStorage.user ? JSON.parse(localStorage.getItem('user')).email
+    : '';
 
   return (
     <form>
