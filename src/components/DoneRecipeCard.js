@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import share from '../images/shareIcon.svg';
 
 export default function DoneRecipeCard({ element, index }) {
@@ -12,7 +13,15 @@ export default function DoneRecipeCard({ element, index }) {
     <div
       data-testid={ `${index}-recipe-card` }
     >
-      <img src={ image } alt={ name } data-testid={ `${index}-horizontal-image` } />
+      <Link to={ `./${isMeal}/${id}` }>
+        <img
+          src={ image }
+          alt={ name }
+          data-testid={ `${index}-horizontal-image` }
+          width="400"
+        />
+        <p data-testid={ `${index}-horizontal-name` }>{ name }</p>
+      </Link>
       <p data-testid={ `${index}-horizontal-top-text` }>
         {
           alcoholicOrNot !== ''
@@ -21,7 +30,6 @@ export default function DoneRecipeCard({ element, index }) {
         }
 
       </p>
-      <p data-testid={ `${index}-horizontal-name` }>{ name }</p>
       <p data-testid={ `${index}-horizontal-done-date` }>{ doneDate }</p>
       <button
         type="button"
