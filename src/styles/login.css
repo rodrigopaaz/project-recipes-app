@@ -39,11 +39,16 @@
     border: 0.5px solid #41197F;
     border-radius: 5px;
     }
+
+    .form__login form input::placeholder{
+    font-size: 10px;
+    }
+
     .form__login form button {
         width: 176px;
     height: 40px;
     color: black;
-    
+    font-size: 12px;
     background: #FCC436;
     border-radius: 5px;
     }
