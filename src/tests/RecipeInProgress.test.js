@@ -16,8 +16,24 @@ describe('Testando o componente Login', () => (
       userEvent.click(favorite);
       userEvent.click(favorite);
 
+      let clipboardData = '';
+      const mockClipboard = {
+        writeText: jest.fn(
+          (data) => { clipboardData = data; },
+        ),
+        readText: jest.fn(
+          () => clipboardData,
+        ),
+      };
+      global.navigator.clipboard = mockClipboard;
+
       const share = await screen.findByTestId('share-btn');
       userEvent.click(share);
+      expect(navigator.clipboard.readText()).toBe('http://localhost/');
+      expect(navigator.clipboard.writeText).toBeCalledTimes(1);
+      expect(navigator.clipboard.writeText).toHaveBeenCalledWith('http://localhost/');
+      const linkCopied = screen.getByText('Link copied!');
+      expect(linkCopied).toBeInTheDocument();
 
       const checkList = await screen.findAllByRole('checkbox');
       checkList.forEach((e) => userEvent.click(e));
