@@ -75,7 +75,7 @@ export default function RecipeDetails() {
 
   const removeFavorite = () => {
     const saved = JSON.parse(localStorage.favoriteRecipes) || '';
-    const removeItem = saved.filter((el) => el.ID !== id);
+    const removeItem = saved.filter((el) => el.id !== id);
     localStorage.setItem('favoriteRecipes', JSON.stringify(removeItem));
   };
 

@@ -7,6 +7,7 @@ export default function AppProvider({ children }) {
   const [filteredApi, setFilteredApi] = useState(null);
   const [handleDish, setHandleDish] = useState(null);
   const [handleEndPoint, setHandleEndPoint] = useState('');
+  const [filterFavoriteRecipes, setFilterFavoriteRecipes] = useState('all');
 
   const data = useMemo(
     () => ({ handleSearch,
@@ -19,10 +20,13 @@ export default function AppProvider({ children }) {
       setHandleDish,
       handleEndPoint,
       setHandleEndPoint,
+      filterFavoriteRecipes,
+      setFilterFavoriteRecipes,
     }),
     [handleSearch, setHandleSearch, handleChoice,
       setHandleChoice, setFilteredApi, filteredApi, handleDish,
-      setHandleDish, handleEndPoint, setHandleEndPoint],
+      setHandleDish, handleEndPoint, setHandleEndPoint,
+      filterFavoriteRecipes, setFilterFavoriteRecipes],
   );
 
   return (
