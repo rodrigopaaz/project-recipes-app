@@ -5,11 +5,11 @@ import { Switch, Route } from 'react-router-dom';
 import Login from './components/Login';
 import Meals from './pages/meals';
 import Drinks from './pages/drinks';
-import Favorite from './pages/favorite-recipes';
 import Done from './pages/DoneRecipes';
 import RecipeDetails from './components/RecipeDetails';
 import RecipeInProgress from './components/RecipeInProgress';
 import ProfilePage from './pages/profile-pages';
+import Favorite from './pages/FavoriteRecipes';
 
 function App() {
   return (

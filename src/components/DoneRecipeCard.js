@@ -7,7 +7,6 @@ export default function DoneRecipeCard({ element, index }) {
     nationality, alcoholicOrNot, doneDate, tags } = element;
   const [isCopied, setIsCopied] = useState(false);
   const isMeal = type === 'meal' ? 'meals' : 'drinks';
-  console.log(type);
   return (
 
     <div

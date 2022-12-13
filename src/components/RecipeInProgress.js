@@ -110,7 +110,7 @@ export default function RecipeInProgress() {
       name,
       image };
     const updated = [...saved, newData];
-    if (!saved.find((el) => el.ID === newData.ID)) {
+    if (!saved.find((el) => el.ID === newData.id)) {
       localStorage.setItem('favoriteRecipes', JSON.stringify(updated));
     }
   };
