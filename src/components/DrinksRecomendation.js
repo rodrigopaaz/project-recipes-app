@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Carousel } from 'react-bootstrap';
+import '../styles/mealsRecomendation.css';
 
 export default function DrinksRecomendation() {
   const [recomendation, setRecomendation] = useState([]);
@@ -13,7 +14,7 @@ export default function DrinksRecomendation() {
     fetchRecipes();
   }, [URL]);
   return (
-    <div>
+    <div className="div__meal__recomendation">
       <Carousel>
         {recomendation.filter((e, index) => index <= Number('5'))
           .map((drink, index) => (
