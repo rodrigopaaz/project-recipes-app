@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Carousel } from 'react-bootstrap';
-import '../styles/DrinksRecomendation.css';
+import '../styles/mealsRecomendation.css';
 
 export default function DrinksRecomendation() {
   const [recomendation, setRecomendation] = useState([]);
