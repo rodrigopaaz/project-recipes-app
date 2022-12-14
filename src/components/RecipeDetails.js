@@ -137,7 +137,7 @@ export default function RecipeDetails() {
                   {e.strAlcoholic}
                 </h4>
               )}
-              <div className="container-1 row">
+              <div className="container-1 row list">
                 <ul className="col">
                   { ingredients.map((item, index) => (
                     <li
@@ -161,29 +161,31 @@ export default function RecipeDetails() {
               </div>
             </div>
           </div>
-          <p
-            data-testid="instructions"
-            className="container-xxl"
-          >
-            {e.strInstructions}
-
-          </p>
-          { pathname.includes('meals') && (
-            <div className="ratio ratio-1x1 videoDetails container-xxl">
-              <iframe
-                data-testid="video"
-                width="100%"
-                height="425"
-                title={ e.strMeal }
-                src={ e.strYoutube.replace('watch?v=', 'embed/') }
-              />
-            </div>)}
+          <div className="container-xx lad text">
+            {pathname.includes('meals') && (
+              <div className="container-xx ">
+                <iframe
+                  data-testid="video"
+                  width="100%"
+                  height="425"
+                  title={ e.strMeal }
+                  src={ e.strYoutube.replace('watch?v=', 'embed/') }
+                />
+              </div>)}
+            <p
+              data-testid="instructions"
+              className="container-xxl"
+            >
+              {e.strInstructions}
+            </p>
+          </div>
           <div className="container-xxl">
             {pathname.includes('meals') ? <DrinksRecomendation />
               : <MealsRecomendation />}
           </div>
           <button
             style={ { position: 'fixed', bottom: '0px' } }
+            className="button-start"
             type="button"
             data-testid="start-recipe-btn"
             onClick={ (() => {
