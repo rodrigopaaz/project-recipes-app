@@ -1,9 +1,9 @@
-.main__favorites main{
-    height: 50vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.main__favorites main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 50vh;
+  width: 100%;
 }
 
 .main__favorites section{
@@ -15,8 +15,8 @@
     margin-top: 15px;
 }
 
-.favorite__btn button{
- border: none;
- margin-right: 20px;
- background-color: #ffffff;
+.favorite__btn button {
+  background-color: white;
+  border: none;
+  margin-right: 20px;
 }

@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import DoneRecipeCard from '../components/DoneRecipeCard';
 import Header from '../components/Header';
 import profileIcon from '../images/profileIcon.svg';
+import '../styles/DoneRecipes.css';
+import iconFastFood from '../images/iconFastFood.svg';
+import meals from '../images/meals.svg';
+import drinks from '../images/drinks.svg';
 
 export default function Done() {
   const [getDoneRecipes, setGetDoneRecipes] = useState([]);
@@ -32,7 +36,7 @@ export default function Done() {
     getDone();
   }, [filterDoneRecipes]);
   return (
-    <div>
+    <div className="container">
       <Header>
         <h4 data-testid="page-title">Done Recipes</h4>
         <button
@@ -46,37 +50,43 @@ export default function Done() {
         </button>
       </Header>
       <main>
-        <button
-          type="button"
-          data-testid="filter-by-all-btn"
-          onClick={ () => setFilterDoneRecipes('all') }
-        >
-          All
-        </button>
-        <button
-          type="button"
-          data-testid="filter-by-meal-btn"
-          onClick={ () => setFilterDoneRecipes('meals') }
-        >
-          Meals
-        </button>
-        <button
-          type="button"
-          data-testid="filter-by-drink-btn"
-          onClick={ () => setFilterDoneRecipes('drinks') }
-        >
-          Drinks
-        </button>
-        <section>
-          { getDoneRecipes.map((e, index) => (
-            <div key={ index + e.id }>
-              <DoneRecipeCard
-                element={ e }
-                index={ index }
-              />
-            </div>
-          ))}
-        </section>
+        <div>
+          <button
+            type="button"
+            data-testid="filter-by-all-btn"
+            onClick={ () => setFilterDoneRecipes('all') }
+            className="button-all"
+          >
+            <img src={ iconFastFood } alt="fast-food-icon" />
+            <p className="link-paragraph">All</p>
+          </button>
+          <button
+            type="button"
+            data-testid="filter-by-meal-btn"
+            onClick={ () => setFilterDoneRecipes('meals') }
+            className="button-meals"
+          >
+            <img src={ meals } alt="meals-icon" />
+            <p className="link-paragraph">Meals</p>
+          </button>
+          <button
+            type="button"
+            data-testid="filter-by-drink-btn"
+            onClick={ () => setFilterDoneRecipes('drinks') }
+            className="button-drinks"
+          >
+            <img src={ drinks } alt="drinks-icon" />
+            <p className="link-paragraph">Drinks</p>
+          </button>
+        </div>
+        { getDoneRecipes.map((e, index) => (
+          <div key={ index + e.id }>
+            <DoneRecipeCard
+              element={ e }
+              index={ index }
+            />
+          </div>
+        ))}
       </main>
     </div>
   );
