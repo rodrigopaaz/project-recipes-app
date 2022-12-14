@@ -1,5 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import '../styles/profile.css';
+import done from '../images/done.svg';
+import favorite from '../images/favorite.svg';
+import logout from '../images/Logout.svg';
 
 function Profile() {
   const history = useHistory();
@@ -17,14 +21,16 @@ function Profile() {
         data-testid="profile-done-btn"
         onClick={ () => history.push('/done-recipes') }
       >
-        Done Recipes
+        <img src={ done } alt="doner_img" />
+
       </button>
       <button
         type="button"
         data-testid="profile-favorite-btn"
         onClick={ () => history.push('/favorite-recipes') }
       >
-        Favorite Recipes
+        <img src={ favorite } alt="favorite_img" />
+
       </button>
       <button
         type="button"
@@ -34,7 +40,8 @@ function Profile() {
           history.push('/');
         } }
       >
-        Logout
+        <img src={ logout } alt="logout_img" />
+
       </button>
     </form>
   );
