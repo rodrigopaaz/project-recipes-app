@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import share from '../images/shareIcon.svg';
+import share from '../images/share.svg';
+import '../styles/DoneRecipeCard.css';
 
 export default function DoneRecipeCard({ element, index }) {
   const { id, image, name, category, type,
@@ -10,53 +11,69 @@ export default function DoneRecipeCard({ element, index }) {
   return (
 
     <div
+      className="container-recipe-card"
       data-testid={ `${index}-recipe-card` }
     >
-      <Link to={ `./${isMeal}/${id}` }>
-        <img
-          src={ image }
-          alt={ name }
-          data-testid={ `${index}-horizontal-image` }
-          width="400"
-        />
-        <p data-testid={ `${index}-horizontal-name` }>{ name }</p>
-      </Link>
-      <p data-testid={ `${index}-horizontal-top-text` }>
-        {
-          alcoholicOrNot !== ''
-            ? alcoholicOrNot
-            : `${nationality} - ${category}`
-        }
-
-      </p>
-      <p data-testid={ `${index}-horizontal-done-date` }>{ doneDate }</p>
-      <button
-        type="button"
-        onClick={ () => {
-          if (navigator.clipboard) {
-            const recipeUrl = window.location.href;
-            navigator.clipboard.writeText(recipeUrl
-              .replace('done-recipes', `${isMeal}/${id}`));
+      <section>
+        <Link to={ `./${isMeal}/${id}` }>
+          <img
+            src={ image }
+            alt={ name }
+            data-testid={ `${index}-horizontal-image` }
+            className="image-card"
+          />
+        </Link>
+      </section>
+      <section className="right-section">
+        <Link to={ `./${isMeal}/${id}` }>
+          <p className="title" data-testid={ `${index}-horizontal-name` }>{ name }</p>
+        </Link>
+        <p className="category" data-testid={ `${index}-horizontal-top-text` }>
+          {
+            alcoholicOrNot !== ''
+              ? alcoholicOrNot
+              : `${nationality} - ${category}`
           }
-          setIsCopied(true);
-        } }
-      >
-        <img
-          src={ share }
-          alt="share-recipe"
-          data-testid={ `${index}-horizontal-share-btn` }
-        />
-      </button>
-      {isCopied && <p>Link copied!</p>}
-      <ul>
-        {tags.map((tagName, ind) => (
-          <li
-            data-testid={ `${index}-${tagName}-horizontal-tag` }
-            key={ ind }
-          >
-            {tagName}
-          </li>))}
-      </ul>
+        </p>
+        <p
+          className="date"
+          data-testid={ `${index}-horizontal-done-date` }
+        >
+          { doneDate }
+        </p>
+        <ul>
+          {tags.map((tagName, ind) => (
+            <li
+              data-testid={ `${index}-${tagName}-horizontal-tag` }
+              key={ ind }
+              className="tags"
+            >
+              {tagName}
+            </li>))}
+        </ul>
+      </section>
+      <section>
+        <button
+          className="button-share"
+          type="button"
+          onClick={ () => {
+            if (navigator.clipboard) {
+              const recipeUrl = window.location.href;
+              navigator.clipboard.writeText(recipeUrl
+                .replace('done-recipes', `${isMeal}/${id}`));
+            }
+            setIsCopied(true);
+          } }
+        >
+          <img
+            src={ share }
+            alt="share-recipe"
+            data-testid={ `${index}-horizontal-share-btn` }
+            className="image-share"
+          />
+        </button>
+        {isCopied && <p className="link-paragraph">Link copied!</p>}
+      </section>
     </div>
 
   );

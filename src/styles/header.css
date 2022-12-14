@@ -1,0 +1,175 @@
+@media only screen and (max-width: 499px) and (min-width: 100px)
+{
+
+    .div__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 132px;
+        margin-bottom: 200px;
+        
+        background: #FCDC36;
+    }
+    
+    .div__header img:first-child {
+        width: 50px;
+        height: 55%;
+        margin: 0 0% 0 5%;
+    }
+    
+    .div__header img:nth-child(2) {
+        width: 180px;
+        height: 25%;
+        margin: 0 15% 0 0;
+    }
+    
+    .div__header button{
+        border: none;
+        background-color: #FCDC36;
+
+    }
+
+    .div__header button img{
+    width: 25px !important;
+    height: 25px;
+    }
+    
+    .div__meal__drink {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        position: absolute;
+        margin-top: 350px
+    }
+
+    .div__header .div__meal__drink img{
+        width: 847px;
+        height: 154px;
+    }
+
+    h4 {
+        display: none;
+    }
+
+    .div__header form{
+        display: block;
+        margin-top: 600px;
+        
+    }
+
+
+}    
+
+@media only screen and (max-width: 1000px) and (min-width: 500px)
+{
+
+    .div__header {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 100%;
+        height: 132px;
+    margin-bottom: 250px;
+        
+        background: #FCDC36;
+    }
+    
+    .div__header img:first-child {
+        width: 62.6px;
+        height: 89.28px;
+        margin: 0 5% 0 5%;
+    }
+    
+    .div__header img:nth-child(2) {
+        width: 200.13px;
+        height: 50.97px;
+        margin: 0 10% 0 0;
+    }
+    
+    .div__header button{
+        border: none;
+        background-color: #FCDC36;
+    }
+
+    .div__header button img{
+    width: 40px !important;
+    height: 40px;
+    }
+    
+    .div__meal__drink {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        position: absolute;
+        margin-top: 350px
+    }
+
+    .div__header .div__meal__drink img{
+        width: 847px;
+        height: 164px;
+    }
+
+    h4 {
+        display: none;
+    }
+
+
+}    
+
+@media only screen and (min-width: 1001px)
+{
+
+    .div__header {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 100%;
+        height: 132px;
+    margin-bottom: 250px;
+        
+        background: #FCDC36;
+    }
+    
+    .div__header img:first-child {
+        width: 62.6px;
+        height: 69.28px;
+        margin: 0 5% 0 5%;
+    }
+    
+    .div__header img:nth-child(2) {
+        width: 400.13px;
+        height: 50.97px;
+        margin: 0 40% 0 -30px;
+    }
+    
+    .div__header button{
+        border: none;
+        background-color: #FCDC36;
+    }
+
+    .div__header button img{
+    width: 40px !important;
+    height: 40px;
+    }
+    
+    .div__meal__drink {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        position: absolute;
+        margin-top: 350px
+    }
+
+    .div__header .div__meal__drink img{
+        width: 847px;
+        height: 164px;
+    }
+
+    h4 {
+        display: none;
+    }
+
+
+}    
+

@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Carousel } from 'react-bootstrap';
+import '../styles/mealsRecomendation.css';
 
 export default function MealsRecomendation() {
   const [recomendation, setRecomendation] = useState([]);
@@ -12,23 +14,29 @@ export default function MealsRecomendation() {
     fetchRecipes();
   }, [URL]);
   return (
-    <div style={ { width: '100%', display: 'flex', overflow: 'scroll' } }>
-      <div style={ { width: '100%', display: 'flex', overflow: 'scroll' } }>
+    <div className="div__meal__recomendation">
+      <Carousel>
         {recomendation.filter((e, index) => index <= Number('5'))
-          .map((meal, index) => (
-            <div
-              key={ meal.strMeal }
-              style={ { width: '60%' } }
-            >
-              <img
-                data-testid={ `${index}-recommendation-card` }
-                src={ meal.strMealThumb }
-                alt={ meal.strMeal }
-              />
-              <p data-testid={ `${index}-recommendation-title` }>{meal.strMeal}</p>
-            </div>
+          .map((drink, index) => (
+            <Carousel.Item key={ drink.strMeal }>
+              <div className="recomendation">
+                <img
+                  className="d-block w-100"
+                  data-testid={ `${index}-recommendation-card` }
+                  src={ drink.strMealThumb }
+                  alt={ drink.strMeal }
+                />
+                <Carousel.Caption>
+                  <p
+                    data-testid={ `${index}-recommendation-title` }
+                  >
+                    {drink.strMeal}
+                  </p>
+                </Carousel.Caption>
+              </div>
+            </Carousel.Item>
           ))}
-      </div>
+      </Carousel>
     </div>
   );
 }
