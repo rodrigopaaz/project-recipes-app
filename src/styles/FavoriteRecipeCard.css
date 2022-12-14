@@ -22,10 +22,11 @@
 
 .right-section {
   display: flex;
-  flex-flow: nowrap;
   flex-direction: column;
   height: 100%;
-  width: 40%;
+  justify-content: flex-start;
+  padding-left: 10px;
+  width: 50%;
 }
 
 .title {
@@ -37,8 +38,9 @@
   height: 12px;
   left: 203px;
   line-height: 12px;
+  padding-top: 5px;
   text-align: center;
-  top: 317px;
+  top: 484px;
 }
 
 .category {
@@ -51,36 +53,31 @@
   left: 203px;
   line-height: 9px;
   text-align: center;
-  top: 333px;
+  top: 350px;
 }
 
-.date {
-  color: #1a1b1c;
-  font-family: Epilogue , sans-serif;
-  font-size: 9px;
-  font-style: normal;
-  font-weight: 400;
-  height: 9px;
-  left: 202px;
-  line-height: 9px;
-  text-align: center;
-  top: 365px;
+.middle-section {
+  align-self: left;
+  display: flex;
+  justify-content: left;
 }
 
 .button-share {
   background-color: white;
   border: none;
-  height: 35px;
-  left: 300px;
-  top: 463px;
-  width: 35px;
+  height: 50px;
+  left: 180px;
+  right: 15px;
+  top: 350px;
+  width: 50px;
 }
 
 .image-share {
-  height: 20px;
-  left: 300px;
-  top: 463px;
-  width: 20px;
+  height: 25px;
+  left: 180px;
+  right: 15px;
+  top: 350px;
+  width: 25px;
 }
 
 .link-paragraph {
@@ -89,6 +86,29 @@
   font-size: 9px;
   font-style: normal;
   font-weight: 300;
+}
+
+.botton-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding-left: 10px;
+}
+
+.button-favorite {
+  background-color: white;
+  border: none;
+  height: 20.3px;
+  left: 238px;
+  top: 394px;
+  width: 22.89px;
+}
+
+.image-favorite {
+  bottom: 48.21%;
+  left: 66.11%;
+  right: 27.53%;
+  top: 49.25%;
 }
 
 .tags {

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import drinkIcon from '../images/drinkIcon.svg';
-import mealIcon from '../images/mealIcon.svg';
+import drinkIcon from '../images/drinks.svg';
+import mealIcon from '../images/meals.svg';
 import AppContext from '../context/Context';
 
 export default function Footer() {
@@ -26,28 +26,32 @@ export default function Footer() {
 
   return (
     <footer data-testid="footer">
-      <button
-        type="button"
-        onClick={ handleClick }
-      >
-        <img
-          src={ drinkIcon }
-          id="drinks"
-          alt="drinks-bottom-btn"
-          data-testid="drinks-bottom-btn"
-        />
-      </button>
-      <button
-        type="button"
-        onClick={ handleClick }
-      >
-        <img
-          src={ mealIcon }
-          id="meals"
-          alt="meals-bottom-btn"
-          data-testid="meals-bottom-btn"
-        />
-      </button>
+      <div className="container-footer">
+        <button
+          type="button"
+          onClick={ handleClick }
+          className="drinks"
+        >
+          <img
+            src={ drinkIcon }
+            id="drinks"
+            alt="drinks-bottom-btn"
+            data-testid="drinks-bottom-btn"
+          />
+        </button>
+        <button
+          type="button"
+          onClick={ handleClick }
+          className="meals"
+        >
+          <img
+            src={ mealIcon }
+            id="meals"
+            alt="meals-bottom-btn"
+            data-testid="meals-bottom-btn"
+          />
+        </button>
+      </div>
     </footer>
   );
 }

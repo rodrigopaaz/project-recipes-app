@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import share from '../images/shareIcon.svg';
+import share from '../images/share.svg';
 import '../styles/DoneRecipeCard.css';
 
 export default function DoneRecipeCard({ element, index }) {
@@ -72,7 +72,7 @@ export default function DoneRecipeCard({ element, index }) {
             className="image-share"
           />
         </button>
-        {isCopied && <p>Link copied!</p>}
+        {isCopied && <p className="link-paragraph">Link copied!</p>}
       </section>
     </div>
 
