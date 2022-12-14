@@ -6,6 +6,7 @@ import Recipes from '../components/Recipes';
 import AppContext from '../context/Context';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import '../styles/RecipeCard.css';
 
 export default function Meals() {
   const { setHandleSearch, handleSearch, filteredApi } = useContext(AppContext);
@@ -32,11 +33,13 @@ export default function Meals() {
           <img src={ searchIcon } alt="search-icon" data-testid="search-top-btn" />
         </button>
       </Header>
-      <Recipes
-        urlSearch={ URL }
-        urlList="https://www.themealdb.com/api/json/v1/1/list.php?c=list"
-        urlFilter="https://www.themealdb.com/api/json/v1/1/filter.php?c="
-      />
+      <div className="central">
+        <Recipes
+          urlSearch={ URL }
+          urlList="https://www.themealdb.com/api/json/v1/1/list.php?c=list"
+          urlFilter="https://www.themealdb.com/api/json/v1/1/filter.php?c="
+        />
+      </div>
       <Footer />
     </div>
   );

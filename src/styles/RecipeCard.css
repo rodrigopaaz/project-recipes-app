@@ -1,0 +1,46 @@
+.recipeCardDiv {
+  background: white;
+  border: 0.517px solid hsl(0, 0%, 69%);
+  border-radius: 5px;
+  box-sizing: border-box;
+  display: flex;
+  height: 166.12px;
+  justify-self: center;
+  left: 185.12px;
+  margin-left: 100px;
+  margin-top: 30px;
+  top: 250.1px;
+  width: 163.2px;
+}
+
+.central {
+  display: flex;
+  justify-content: center;
+}
+
+.imageCard {
+  border-radius: 5px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  display: flex;
+  height: 131px;
+  left: 185px;
+  top: 250px;
+  width: 161px;
+}
+
+.titleCard {
+  color: hsl(210, 4%, 11%);
+  display: flex;
+  font-family: Georgia , serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  height: 12px;
+  left: 199.81px;
+  line-height: 20px;
+  margin-left: 30px;
+  margin-top: 10px;
+  top: 394.86px;
+  width: 142.8px;
+}
