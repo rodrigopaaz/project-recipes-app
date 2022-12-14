@@ -1,0 +1,65 @@
+/* .container {
+  align-items: center;
+} */
+
+main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 50vh;
+  left: 19px;
+  width: 100%;
+}
+
+.button-all {
+  background-color: white;
+  border: 2.669px solid #fcc436;
+  border-radius: 66.72px;
+  box-sizing: border-box;
+  height: 66.72px;
+  left: 50px;
+  margin-bottom: 10px;
+  margin-right: 20px;
+  padding-top: 5px;
+  top: 184.28px;
+  width: 66.72px;
+}
+
+.link-paragraph {
+  color: #797d86;
+  font-family: Epilogue , sans-serif;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 9px;
+  padding-top: 8px;
+  text-align: center;
+}
+
+.button-meals {
+  background-color: white;
+  border: 2.669px solid #fcc436;
+  border-radius: 66.72px;
+  box-sizing: border-box;
+  height: 66.72px;
+  left: 146.28px;
+  margin-bottom: 10px;
+  margin-right: 20px;
+  padding-top: 5px;
+  top: 184.28px;
+  width: 66.72px;
+}
+
+.button-drinks {
+  background-color: white;
+  border: 2.669px solid #fcc436;
+  border-radius: 66.72px;
+  box-sizing: border-box;
+  height: 66.72px;
+  left: 243px;
+  margin-bottom: 10px;
+  margin-right: 20px;
+  padding-top: 5px;
+  top: 184.28px;
+  width: 66.72px;
+}

@@ -1,20 +1,18 @@
 form {
+    align-items: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    height: 250px;
     font-weight: 500;
-    
+    height: 250px;
+    justify-content: space-between;
+
 }
 
 form button {
-
-border: none;
-background-color: #ffffff;
-border-top: solid 1px #d7d9df;
-
-width: 256px;
-height: 66px;
+    background-color: #fff;
+    border: none;
+    border-top: solid 1px #d7d9df;
+    height: 66px;
+    width: 256px;
 
 }
