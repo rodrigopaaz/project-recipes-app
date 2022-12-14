@@ -96,8 +96,6 @@ export default function FavoriteRecipeCard({ element, index }) {
             />
           </button>
           {isCopied && <p className="link-paragraph">Link copied!</p>}
-        </section>
-        <section className="botton-section">
           <button
             className="button-favorite"
             type="button"
