@@ -52,6 +52,12 @@
         display: none;
     }
 
+    .div__header form{
+        display: block;
+        margin-top: 600px;
+        
+    }
+
 
 }    
 

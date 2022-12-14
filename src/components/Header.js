@@ -15,13 +15,15 @@ export default function Header({ children }) {
   const food = pathname.includes('meal') ? meals : drinks;
 
   return (
-    <div className="div__header">
-      <img src={ headerRecipesImg } alt="header_img" />
-      <img src={ logoRecipesApp } alt="logo_img" />
-      <div className="div__meal__drink">
-        <img src={ food } alt="food_img" />
+    <div className="main__header">
+      <div className="div__header">
+        <img src={ headerRecipesImg } alt="header_img" />
+        <img src={ logoRecipesApp } alt="logo_img" />
+        <div className="div__meal__drink">
+          <img src={ food } alt="food_img" />
+        </div>
+        {children}
       </div>
-      {children}
       {handleSearch && <SearchBar />}
     </div>
   );
