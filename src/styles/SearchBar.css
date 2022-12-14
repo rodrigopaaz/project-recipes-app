@@ -1,0 +1,34 @@
+.inputSearch {
+    box-sizing: border-box;
+margin-bottom: 10px;
+width: 338px;
+height: 40px;
+left: 11px;
+top: 168px;
+
+background: #FFFFFF;
+border: 1px solid #B1B1B1;
+border-radius: 5px;
+}
+
+.container-search {
+    color: white;
+width: 338px;
+height: 88px;
+left: 11px;
+top: 188px;
+padding-bottom: 120px;
+background: #41197F;
+border-radius: 10px;
+}
+
+.btn-search {
+width: 208.16px;
+height: 25px;
+left: 73.86px;
+top: 243px;
+margin-top: 10px;
+background: #FCC436;
+border-radius: 5px; 
+color: white;
+}

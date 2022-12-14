@@ -6,7 +6,7 @@ import Recipes from '../components/Recipes';
 import AppContext from '../context/Context';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
-import '../styles/RecipeCard.css';
+import '../styles/meals.css';
 
 export default function Meals() {
   const { setHandleSearch, handleSearch, filteredApi } = useContext(AppContext);

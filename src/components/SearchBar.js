@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import useFetch from '../hooks/useFetch';
 import AppContext from '../context/Context';
+import '../styles/SearchBar.css';
 
 export default function SearchBar() {
   const { handleChoice, setFilteredApi } = useContext(AppContext);
@@ -56,13 +57,15 @@ export default function SearchBar() {
 
   return (
     <form>
-      <div>
+      <div className="container-search">
         <label htmlFor="searchFood">
           <input
+            className="inputSearch"
             type="text"
             name="searchFood"
             data-testid="search-input"
             onChange={ ({ target }) => setOnChangeInput(target.value) }
+            placeholder="Search"
           />
         </label>
         <label htmlFor="ingredient">
@@ -105,6 +108,7 @@ export default function SearchBar() {
             handleClick();
             setFilteredApi(url);
           } }
+          className="btn-search"
         >
           Search
         </button>
