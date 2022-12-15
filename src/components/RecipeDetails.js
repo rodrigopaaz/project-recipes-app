@@ -81,62 +81,77 @@ export default function RecipeDetails() {
   };
 
   return (
-    <div>
+    <div className="recipe__details__main">
       {isCopy && <p>Link copied!</p>}
-      <div style={ { display: 'flex', justifyContent: 'center', width: '100%' } }>
-        <button
-          type="button"
-          data-testid="share-btn"
-          onClick={ () => {
-            if (navigator.clipboard) {
-              navigator.clipboard.writeText(recipeUrl);
-            }
-            setIsCopy(true);
-          } }
-        >
-          Share
-        </button>
-        <button
-          type="button"
-          onClick={ (() => {
-            if (!isFavorite) { saveFavorite(e); }
-            if (isFavorite) { removeFavorite(); }
-            setIsFavorite(!isFavorite);
-          }
-          ) }
-        >
-          <img
-            data-testid="favorite-btn"
-            src={ !isFavorite
-              ? heartOn
-              : heartOff }
-            alt="favorites"
-          />
-        </button>
-      </div>
+
       {fetchMealOrDrink.map((e) => (
         <div key={ e.idMeal || e.idDrink }>
           <div className="container-xxl">
-            <div className="g-col-6">
-              <img
+            <div
+              className="g-col-6 recipe__img"
+              style={ { backgroundImage: `url( 
+            ${e.strMealThumb || e.strDrinkThumb})`,
+              with: '100%',
+              height: '400px',
+              } }
+            >
+              <div
+                style={ { display: 'flex', justifyContent: 'center', width: '100%' } }
+                className="details__header"
+              >
+                <div>
+                  <button
+                    type="button"
+                    data-testid="share-btn"
+                    onClick={ () => {
+                      if (navigator.clipboard) {
+                        navigator.clipboard.writeText(recipeUrl);
+                      }
+                      setIsCopy(true);
+                    } }
+                  >
+                    Share
+                  </button>
+                  <button
+                    type="button"
+                    onClick={ (() => {
+                      if (!isFavorite) { saveFavorite(e); }
+                      if (isFavorite) { removeFavorite(); }
+                      setIsFavorite(!isFavorite);
+                    }
+                    ) }
+                  >
+                    <img
+                      data-testid="favorite-btn"
+                      src={ !isFavorite
+                        ? heartOn
+                        : heartOff }
+                      alt="favorites"
+                    />
+                  </button>
+                </div>
+                <h3 data-testid="recipe-category">{e.strCategory}</h3>
+              </div>
+              {/*               <img
                 src={ e.strMealThumb || e.strDrinkThumb }
                 alt={ e.strMeal || e.strDrink }
                 data-testid="recipe-photo"
                 className="img-fluid"
-              />
-            </div>
-            <div>
+              /> */}
               <h2
                 data-testid="recipe-title"
               >
                 {e.strMeal || e.strDrink}
               </h2>
-              <h3 data-testid="recipe-category">{e.strCategory}</h3>
+            </div>
+            <div>
+
               {pathname.includes('drinks') && (
                 <h4 data-testid="recipe-category">
                   {e.strAlcoholic}
                 </h4>
               )}
+              <h5>Ingredients</h5>
               <div className="container-1 row list">
                 <ul className="col">
                   { ingredients.map((item, index) => (
@@ -144,7 +159,7 @@ export default function RecipeDetails() {
                       key={ index }
                       data-testid={ `${index}-ingredient-name-and-measure` }
                     >
-                      {item[1]}
+                      {`${item[1]} - `}
                     </li>
                   ))}
                 </ul>
@@ -172,6 +187,7 @@ export default function RecipeDetails() {
                   src={ e.strYoutube.replace('watch?v=', 'embed/') }
                 />
               </div>)}
+            <h5>Instructions</h5>
             <p
               data-testid="instructions"
               className="container-xxl"

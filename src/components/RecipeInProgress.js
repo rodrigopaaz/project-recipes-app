@@ -122,77 +122,90 @@ export default function RecipeInProgress() {
   };
 
   return (
-    <div>
+    <div className="recipe__details__main">
       { fetchMealOrDrink.map((e) => (
         <div key={ e.idMeal || e.idDrink }>
-          <button
-            data-testid="share-btn"
-            type="button"
-            onClick={ () => {
-              if (navigator.clipboard) {
-                const recipeUrl = window.location.href;
-                navigator.clipboard.writeText(recipeUrl.replace('/in-progress', ''));
-              }
-              setIsCopy(true);
+          <div
+            className="g-col-6 recipe__img"
+            style={ { backgroundImage: `url( 
+         ${e.strMealThumb || e.strDrinkThumb})`,
+            with: '100%',
+            height: '400px',
             } }
+
           >
-            Compartilhar
-          </button>
-          {isCopy && <p>Link copied!</p>}
-          <button
-            type="button"
-            onClick={ (() => {
-              if (!isFavorite) { saveFavorite(e); }
-              if (isFavorite) { removeFavorite(); }
-              setIsFavorite(!isFavorite);
-            }
-            ) }
-          >
-            <img
-              data-testid="favorite-btn"
-              src={ !isFavorite
-                ? heartOn
-                : heartOff }
-              alt="favorites"
-            />
-          </button>
-          <img
+            <button
+              data-testid="share-btn"
+              type="button"
+              onClick={ () => {
+                if (navigator.clipboard) {
+                  const recipeUrl = window.location.href;
+                  navigator.clipboard.writeText(recipeUrl.replace('/in-progress', ''));
+                }
+                setIsCopy(true);
+              } }
+            >
+              Compartilhar
+            </button>
+            {isCopy && <p>Link copied!</p>}
+            <button
+              type="button"
+              onClick={ (() => {
+                if (!isFavorite) { saveFavorite(e); }
+                if (isFavorite) { removeFavorite(); }
+                setIsFavorite(!isFavorite);
+              }
+              ) }
+            >
+              <img
+                data-testid="favorite-btn"
+                src={ !isFavorite
+                  ? heartOn
+                  : heartOff }
+                alt="favorites"
+              />
+            </button>
+            <h2 data-testid="recipe-title">{e.strMeal || e.strDrink}</h2>
+            <h3 data-testid="recipe-category">{e.strCategory}</h3>
+            {/*   <img
             data-testid="recipe-photo"
             src={ e.strMealThumb || e.strDrinkThumb }
             alt={ e.strMeal || e.strDrink }
-          />
-          <h2 data-testid="recipe-title">{e.strMeal || e.strDrink}</h2>
-          <h3 data-testid="recipe-category">{e.strCategory}</h3>
-          { ingredients.map((elem, index) => (
-            <li key={ index }>
-              <label
-                htmlFor={ `${index}-ingredient-step` }
-                data-testid={ `${index}-ingredient-step` }
-                style={ { textDecoration: isChecked[index]
+          /> */}
+          </div>
+          <div className="div__inProgress">
+            { ingredients.map((elem, index) => (
+              <li key={ index }>
+                <label
+                  htmlFor={ `${index}-ingredient-step` }
+                  data-testid={ `${index}-ingredient-step` }
+                  style={ { textDecoration: isChecked[index]
                     && 'line-through solid rgb(0, 0, 0)' } }
-              >
-                <input
-                  type="checkbox"
-                  id={ `${index}-ingredient-step` }
-                  checked={ isChecked[index] }
-                  onChange={ () => handleChange(index) }
-                />
-                {elem[1]}
-              </label>
-            </li>
-          ))}
-          <p data-testid="instructions">{ e.strInstructions }</p>
-          <button
-            data-testid="finish-recipe-btn"
-            type="button"
-            disabled={ isDisabled }
-            onClick={ () => {
-              doneRecipesLocalStorage(e);
-              history.push('/done-recipes');
-            } }
-          >
-            Finalizar
-          </button>
+                >
+                  <input
+                    className="check__recipe"
+                    type="checkbox"
+                    id={ `${index}-ingredient-step` }
+                    checked={ isChecked[index] }
+                    onChange={ () => handleChange(index) }
+                  />
+                  {elem[1]}
+                </label>
+              </li>
+            ))}
+            <p data-testid="instructions">{ e.strInstructions }</p>
+            <button
+              data-testid="finish-recipe-btn"
+              type="button"
+              disabled={ isDisabled }
+              onClick={ () => {
+                doneRecipesLocalStorage(e);
+                history.push('/done-recipes');
+              } }
+            >
+              Finalizar
+            </button>
+          </div>
         </div>
       ))}
     </div>
