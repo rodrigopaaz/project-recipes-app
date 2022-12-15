@@ -1,5 +1,13 @@
-.central{
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
+.central {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.main__recipes {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
 }

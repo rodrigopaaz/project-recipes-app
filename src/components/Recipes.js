@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import AppContext from '../context/Context';
 import RecipeCard from './RecipeCard';
-import all from '../images/allcard.svg';
+import all from '../images/all.svg';
 import Breakfast from '../images/breakfast.svg';
 import Chicken from '../images/chicken.svg';
 import Dessert from '../images/dessert.svg';
@@ -66,24 +66,24 @@ export default function Recipes({ urlSearch, urlList, urlFilter }) {
   return (
     <main>
       <div className="main__recipes">
-        <button
-          type="button"
+        <input
+          type="image"
+          alt="all_recipes"
           data-testid="All-category-filter"
           onClick={ () => setSlugCategory('') }
-        >
-          <img src={ all } alt="all_recipes" />
-        </button>
+          src={ all }
+        />
         { categoryApi.filter((e, index) => index <= Number('4')).map((e, index) => (
-          <button
+          <input
             key={ index }
-            type="button"
+            type="image"
+            alt={ e.strCategory }
             data-testid={ `${e.strCategory}-category-filter` }
             name={ e.strCategory }
             value={ e.strCategory }
             onClick={ ({ target }) => { handleChangeCategory(target); } }
-          >
-            <img src={ images[e.strCategory] } alt={ e.strCategory } />
-          </button>
+            src={ images[e.strCategory] }
+          />
         ))}
       </div>
       <div className="main__meals">
