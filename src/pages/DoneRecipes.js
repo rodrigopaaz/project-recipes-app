@@ -38,7 +38,7 @@ export default function Done() {
     getDone();
   }, [filterDoneRecipes]);
   return (
-    <div className="container">
+    <div>
       <Header>
         <h4 data-testid="page-title">Done Recipes</h4>
         <button
@@ -82,14 +82,16 @@ export default function Done() {
             <p className="link-paragraph">Drinks</p>
           </button>
         </div>
-        { getDoneRecipes.map((e, index) => (
-          <div key={ index + e.id }>
-            <DoneRecipeCard
-              element={ e }
-              index={ index }
-            />
-          </div>
-        ))}
+        <div className="div__done__recipes">
+          { getDoneRecipes.map((e, index) => (
+            <div key={ index + e.id }>
+              <DoneRecipeCard
+                element={ e }
+                index={ index }
+              />
+            </div>
+          ))}
+        </div>
       </main>
     </div>
   );

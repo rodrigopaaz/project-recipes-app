@@ -59,3 +59,23 @@ main {
   top: 184.28px;
   width: 66.72px;
 }
+
+.container {
+  width: 100% !important
+}
+
+.div__done__recipes{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.div__done__recipes div{
+  margin: 1px;
+}
+
+.div__done__recipes div .tags{
+  color: black;
+  font-weight: 500;
+}
