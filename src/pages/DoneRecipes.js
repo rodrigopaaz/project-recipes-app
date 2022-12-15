@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import DoneRecipeCard from '../components/DoneRecipeCard';
 import Header from '../components/Header';
 import profileIcon from '../images/profileIcon.svg';
@@ -8,6 +9,7 @@ import meals from '../images/meals.svg';
 import drinks from '../images/drinks.svg';
 
 export default function Done() {
+  const history = useHistory();
   const [getDoneRecipes, setGetDoneRecipes] = useState([]);
   const [filterDoneRecipes, setFilterDoneRecipes] = useState('all');
   useEffect(() => {
@@ -41,6 +43,7 @@ export default function Done() {
         <h4 data-testid="page-title">Done Recipes</h4>
         <button
           type="button"
+          onClick={ () => history.push('./profile') }
         >
           <img
             src={ profileIcon }

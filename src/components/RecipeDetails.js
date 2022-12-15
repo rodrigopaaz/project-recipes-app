@@ -81,39 +81,7 @@ export default function RecipeDetails() {
   };
 
   return (
-    <div>
-      {isCopy && <p>Link copied!</p>}
-      <div style={ { display: 'flex', justifyContent: 'center', width: '100%' } }>
-        <button
-          type="button"
-          data-testid="share-btn"
-          onClick={ () => {
-            if (navigator.clipboard) {
-              navigator.clipboard.writeText(recipeUrl);
-            }
-            setIsCopy(true);
-          } }
-        >
-          Share
-        </button>
-        <button
-          type="button"
-          onClick={ (() => {
-            if (!isFavorite) { saveFavorite(e); }
-            if (isFavorite) { removeFavorite(); }
-            setIsFavorite(!isFavorite);
-          }
-          ) }
-        >
-          <img
-            data-testid="favorite-btn"
-            src={ !isFavorite
-              ? heartOn
-              : heartOff }
-            alt="favorites"
-          />
-        </button>
-      </div>
+    <div style={ { display: 'flex', justifyContent: 'center', width: '100%' } }>
       {fetchMealOrDrink.map((e) => (
         <div key={ e.idMeal || e.idDrink }>
           <div className="container-xxl">
@@ -124,6 +92,38 @@ export default function RecipeDetails() {
                 data-testid="recipe-photo"
                 className="img-fluid"
               />
+            </div>
+            <div>
+              {isCopy && <p>Link copied!</p>}
+              <button
+                type="button"
+                data-testid="share-btn"
+                onClick={ () => {
+                  if (navigator.clipboard) {
+                    navigator.clipboard.writeText(recipeUrl);
+                  }
+                  setIsCopy(true);
+                } }
+              >
+                Share
+              </button>
+              <button
+                type="button"
+                onClick={ (() => {
+                  if (!isFavorite) { saveFavorite(e); }
+                  if (isFavorite) { removeFavorite(); }
+                  setIsFavorite(!isFavorite);
+                }
+                ) }
+              >
+                <img
+                  data-testid="favorite-btn"
+                  src={ !isFavorite
+                    ? heartOn
+                    : heartOff }
+                  alt="favorites"
+                />
+              </button>
             </div>
             <div>
               <h2
