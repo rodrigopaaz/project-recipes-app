@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import DrinksRecomendation from './DrinksRecomendation';
-import MealsRecomendation from './MealsRecomendation copy';
-import heartOn from '../images/whiteHeartIcon.svg';
-import heartOff from '../images/blackHeartIcon.svg';
+import MealsRecomendation from './MealsRecomendation';
+import heartOn from '../images/whiteHeart.png';
+import heartOff from '../images/blackHeart.svg';
+import share from '../images/share.svg';
 import '../styles/RecipeDetails.css';
+import addOrRemoveFavorite from './addOrRemoveFavorite';
 
 export default function RecipeDetails() {
   const params = useParams();
@@ -17,6 +19,8 @@ export default function RecipeDetails() {
   const [measures, setMeasures] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
 
+  const { saveFavorite, removeFavorite } = addOrRemoveFavorite();
+
   useEffect(() => {
     const mealsUrl = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
     const drinksUrl = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
@@ -28,10 +32,6 @@ export default function RecipeDetails() {
       setFetchMealOrDrink(recipes || []);
       setIngredients(Object.entries(recipes[0])
         .filter(([key, value]) => key.includes('Ingredient') && value));
-      // .reduce((acc, atual) => {
-      //   acc = acc[atual];
-      //   return acc;
-      // }, {}));
       setMeasures(Object.entries(recipes[0])
         .filter(([key, value]) => key.includes('Measure') && value && value !== ' '));
 
@@ -49,37 +49,6 @@ export default function RecipeDetails() {
     ? 'Continue Recipe' : 'Start Recipe';
   const recipeUrl = window.location.href;
 
-  const saveFavorite = (e) => {
-    if (!localStorage.favoriteRecipes) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([]));
-    }
-    const ID = e.idMeal || e.idDrink;
-    const type = e.idMeal ? 'meal' : 'drink';
-    const nationality = e.strArea || '';
-    const category = e.strCategory || '';
-    const alcoholicOrNot = e.strAlcoholic || '';
-    const name = e.strDrink || e.strMeal;
-    const image = e.strDrinkThumb || e.strMealThumb;
-    const saved = JSON.parse(localStorage.favoriteRecipes);
-    const newData = { id: ID,
-      type,
-      nationality,
-      category,
-      alcoholicOrNot,
-      name,
-      image };
-    const updated = [...saved, newData];
-    if (!saved.find((el) => el.ID === newData.ID)) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify(updated));
-    }
-  };
-
-  const removeFavorite = () => {
-    const saved = JSON.parse(localStorage.favoriteRecipes) || '';
-    const removeItem = saved.filter((el) => el.id !== id);
-    localStorage.setItem('favoriteRecipes', JSON.stringify(removeItem));
-  };
-
   return (
     <div className="recipe__details__main">
       {isCopy && <p>Link copied!</p>}
@@ -95,49 +64,44 @@ export default function RecipeDetails() {
               height: '400px',
               } }
             >
-              <div
-                style={ { display: 'flex', justifyContent: 'center', width: '100%' } }
-                className="details__header"
+              <button
+                className="favorite_btn"
+                type="button"
+                data-testid="share-btn"
+                onClick={ () => {
+                  if (navigator.clipboard) {
+                    navigator.clipboard.writeText(recipeUrl);
+                  }
+                  setIsCopy(true);
+                } }
               >
-                <div>
-                  <button
-                    type="button"
-                    data-testid="share-btn"
-                    onClick={ () => {
-                      if (navigator.clipboard) {
-                        navigator.clipboard.writeText(recipeUrl);
-                      }
-                      setIsCopy(true);
-                    } }
-                  >
-                    Share
-                  </button>
-                  <button
-                    type="button"
-                    onClick={ (() => {
-                      if (!isFavorite) { saveFavorite(e); }
-                      if (isFavorite) { removeFavorite(); }
-                      setIsFavorite(!isFavorite);
-                    }
-                    ) }
-                  >
-                    <img
-                      data-testid="favorite-btn"
-                      src={ !isFavorite
-                        ? heartOn
-                        : heartOff }
-                      alt="favorites"
-                    />
-                  </button>
-                </div>
-                <h3 data-testid="recipe-category">{e.strCategory}</h3>
-              </div>
-              {/*               <img
-                src={ e.strMealThumb || e.strDrinkThumb }
-                alt={ e.strMeal || e.strDrink }
-                data-testid="recipe-photo"
-                className="img-fluid"
-              /> */}
+                <img
+                  className="favorite_btn"
+                  data-testid="favorite-btn"
+                  src={ share }
+                  alt="share_btn"
+                />
+              </button>
+              <button
+                type="button"
+                onClick={ (() => {
+                  if (!isFavorite) { saveFavorite(e); }
+                  if (isFavorite) { removeFavorite(id); }
+                  setIsFavorite(!isFavorite);
+                }
+
+                ) }
+              >
+                <img
+                  data-testid="favorite-btn"
+                  src={ !isFavorite
+                    ? heartOn
+                    : heartOff }
+                  alt="favorites"
+                />
+              </button>
+              <h3 data-testid="recipe-category">{e.strCategory}</h3>
+
               <h2
                 data-testid="recipe-title"
               >

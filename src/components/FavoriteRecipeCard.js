@@ -9,7 +9,7 @@ import '../styles/FavoriteRecipeCard.css';
 export default function FavoriteRecipeCard({ element, index }) {
   const { id, image, name, category, type,
     nationality, alcoholicOrNot, tags } = element;
-  const [isCopied, setIsCopied] = useState(false);
+  const [isCopy, setIsCopy] = useState(false);
   const isMeal = type === 'meal' ? 'meals' : 'drinks';
   const [isFavorite, setIsFavorite] = useState(false);
   const { setFilterFavoriteRecipes } = useContext(AppContext);
@@ -23,24 +23,6 @@ export default function FavoriteRecipeCard({ element, index }) {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFavorite]);
-
-  const saveFavorite = () => {
-    if (!localStorage.favoriteRecipes) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([]));
-    }
-    const saved = JSON.parse(localStorage.favoriteRecipes);
-    const newData = { id,
-      type,
-      nationality,
-      category,
-      alcoholicOrNot,
-      name,
-      image };
-    const updated = [...saved, newData];
-    if (!saved.find((el) => el.ID === newData.id)) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify(updated));
-    }
-  };
 
   const removeFavorite = () => {
     const saved = JSON.parse(localStorage.favoriteRecipes) || '';
@@ -85,7 +67,7 @@ export default function FavoriteRecipeCard({ element, index }) {
                 navigator.clipboard.writeText(recipeUrl
                   .replace('favorite-recipes', `${isMeal}/${id}`));
               }
-              setIsCopied(true);
+              setIsCopy(true);
             } }
           >
             <img
@@ -95,12 +77,11 @@ export default function FavoriteRecipeCard({ element, index }) {
               className="image-share"
             />
           </button>
-          {isCopied && <p className="link-paragraph">Link copied!</p>}
+          {isCopy && <p className="link-paragraph">Link copied!</p>}
           <button
             className="button-favorite"
             type="button"
             onClick={ (() => {
-              if (!isFavorite) { saveFavorite(); }
               if (isFavorite) {
                 removeFavorite();
                 setFilterFavoriteRecipes(id);

@@ -6,7 +6,7 @@ import '../styles/DoneRecipeCard.css';
 export default function DoneRecipeCard({ element, index }) {
   const { id, image, name, category, type,
     nationality, alcoholicOrNot, doneDate, tags } = element;
-  const [isCopied, setIsCopied] = useState(false);
+  const [isCopy, setIsCopy] = useState(false);
   const isMeal = type === 'meal' ? 'meals' : 'drinks';
   return (
 
@@ -62,7 +62,7 @@ export default function DoneRecipeCard({ element, index }) {
               navigator.clipboard.writeText(recipeUrl
                 .replace('done-recipes', `${isMeal}/${id}`));
             }
-            setIsCopied(true);
+            setIsCopy(true);
           } }
         >
           <img
@@ -72,7 +72,7 @@ export default function DoneRecipeCard({ element, index }) {
             className="image-share"
           />
         </button>
-        {isCopied && <p className="link-paragraph">Link copied!</p>}
+        {isCopy && <p className="link-paragraph">Link copied!</p>}
       </section>
     </div>
 

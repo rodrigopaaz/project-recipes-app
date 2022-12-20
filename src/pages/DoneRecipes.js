@@ -7,6 +7,7 @@ import '../styles/DoneRecipes.css';
 import iconFastFood from '../images/iconFastFood.svg';
 import meals from '../images/meals.svg';
 import drinks from '../images/drinks.svg';
+import FooterHome from '../components/FooterHome';
 
 export default function Done() {
   const history = useHistory();
@@ -93,6 +94,7 @@ export default function Done() {
           ))}
         </div>
       </main>
+      <FooterHome />
     </div>
   );
 }

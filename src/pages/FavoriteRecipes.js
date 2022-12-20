@@ -7,6 +7,7 @@ import '../styles/favorite-recipes.css';
 import all from '../images/allcard.svg';
 import drink from '../images/drinkscard.svg';
 import meal from '../images/foodscard.svg';
+import FooterHome from '../components/FooterHome';
 
 export default function Favorite() {
   const [getFavoriteRecipes, setGetFavoriteRecipes] = useState([]);
@@ -81,6 +82,7 @@ export default function Favorite() {
           ))}
         </section>
       </main>
+      <FooterHome />
     </div>
   );
 }

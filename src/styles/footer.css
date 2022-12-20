@@ -1,4 +1,4 @@
-footer {
+/* footer {
   background: #41197f;
   bottom: 0;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.25);
@@ -7,4 +7,23 @@ footer {
   position: fixed;
   top: 754px;
   width: 360px;
+} */
+.home{
+  background-color: transparent;
+  border: none;
 }
+
+.home__btn{
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+}
+
+.container-footer-home{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+

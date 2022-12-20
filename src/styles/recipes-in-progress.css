@@ -1,0 +1,45 @@
+.div__inProgress button{
+    width: 336px;
+height: 40px;
+left: 13px;
+top: 863px;
+
+background: #FCC436;
+border-radius: 5px;
+}
+
+.div__inProgress p{
+text-align: justify;
+padding: 20px;
+}
+
+.div__inProgress {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn__finish{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.div__inProgress h5 {
+margin-left: 15px;
+margin-top: 15px;
+}
+
+.recipe__img button{
+    background-color: transparent;
+    border: none;
+}
+
+.recipe__img button img{
+width: 35px;
+height: 35px;
+}
+
+.share__favorite__btn{
+    margin-top: -250px;
+}

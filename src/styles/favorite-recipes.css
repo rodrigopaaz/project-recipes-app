@@ -8,7 +8,15 @@
 
 .main__favorites section{
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
+    width: 100%;
+}
+
+.main__favorites section div{
+margin-right: 2px;
+
 }
 
 .main__favorites main div{ 
