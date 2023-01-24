@@ -16,7 +16,7 @@
     "react-router-dom": "^5.3.3",
     "react-scripts": "^5.0.1"
   },
-  "homepage": "https://rodrigopaaz.github.io/PROJECT-RECIPES-APP",
+  "homepage": "https://rodrigopaaz.github.io/project-recipes-app",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
