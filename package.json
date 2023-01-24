@@ -8,6 +8,7 @@
   "dependencies": {
     "bootstrap": "^5.2.0",
     "clipboard-copy": "^4.0.1",
+    "gh-pages": "^5.0.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
@@ -15,7 +16,10 @@
     "react-router-dom": "^5.3.3",
     "react-scripts": "^5.0.1"
   },
+  "homepage": "https://username.github.io/app-toot-name",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "cy": "env CY_CLI=true cypress run",
     "cy:open": "cypress open --e2e --browser chrome",
     "start": "env ESLINT_NO_DEV_ERRORS=true react-scripts start",
