@@ -16,6 +16,7 @@ function App() {
     <div>
 
       <Switch>
+        <Route path="/project-recipes-app" exact component={ Login } />
         <Route exact path="/" component={ Login } />
         <Route exact path="/meals" component={ Meals } />
         <Route exact path="/drinks" component={ Drinks } />
